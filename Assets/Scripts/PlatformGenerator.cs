@@ -7,10 +7,9 @@ public class PlatformGenerator : MonoBehaviour {
 	public GameObject thePlatform;
 	public Transform generationPoint;
 	public float distanceBetween;
-	private float platformWidth;
 
 	public GameObject[] thePlatforms;
-	public int[] platformWidths;
+	private float[] platformWidths;
 
 	public float distanceBetweenMin;
 	public float distanceBetweenMax;
@@ -24,8 +23,10 @@ public class PlatformGenerator : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		platformWidth = thePlatform.GetComponent<BoxCollider2D> ().size.x;
-
+		platformWidths = new float[thePlatforms.Length];
+		for (int i = 0; i < thePlatforms.Length; i++) {
+			platformWidths[i] = thePlatforms[i].GetComponent<BoxCollider2D> ().size.x;
+		}
 		minHeight = transform.position.y;
 		maxHeight = maxHeightPoint.position.y;
 	}
@@ -45,9 +46,11 @@ public class PlatformGenerator : MonoBehaviour {
 			if (newHeight < minHeight)
 				newHeight = minHeight;
 
-			transform.position = new Vector3 (transform.position.x + platformWidth + distanceBetween, newHeight, transform.position.z);
+			transform.position = new Vector3 (transform.position.x + platformWidths[platformChosen]/2 + distanceBetween, newHeight, transform.position.z);
 
 			Instantiate (thePlatforms[platformChosen], transform.position, transform.rotation);
+			//Shift generation point to end of platform
+			transform.position = new Vector3(transform.position.x + platformWidths[platformChosen]/2, transform.position.y, transform.position.z);
 		}
 		
 	}
