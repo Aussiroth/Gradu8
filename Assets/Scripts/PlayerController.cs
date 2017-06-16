@@ -3,60 +3,104 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
+    public float moveSpeed;
+    public float jumpForce;
 
-	public float moveSpeed;
-	public float jumpForce;
-	public float jumpTime;
+    public float jumpTime;
+    private float jumpTimeCounter;
 
-	private float jumpTimeCounter;
-	private Rigidbody2D myRigidBody;
-	//private Collider2D myCollider;
+    private bool stoppedJumping;
+    private bool canDoubleJump;
 
-	public bool grounded;
-	public LayerMask isGround;
-	public Transform groundCheck;
-	public float groundCheckRadius;
+    private Rigidbody2D myRigidbody;
+
+    public bool grounded;
+    public LayerMask whatIsGround;
+    public Transform groundCheck;
+    public float groundCheckRadius;
+
+    
+    //private Collider2D myCollider;
+    private Animator myAnimator;
+
+    public GameManager theGameManager;
+
+    public AudioSource jumpSound;
+    public AudioSource deathSound;
 
 	// Use this for initialization
 	void Start () {
-		jumpTimeCounter = jumpTime;
-		myRigidBody = GetComponent<Rigidbody2D> ();
-		//myCollider = GetComponent<Collider2D> ();
-	}
+        myRigidbody = GetComponent<Rigidbody2D>();
+
+        //myCollider = GetComponent<Collider2D>();
+
+        myAnimator = GetComponent<Animator>();
+
+        jumpTimeCounter = jumpTime;
+
+        stoppedJumping = true;
+    }
 	
 	// Update is called once per frame
 	void Update () {
+        //grounded = Physics2D.IsTouchingLayers(myCollider, whatIsGround);
 
-		//grounded = Physics2D.IsTouchingLayers (myCollider, isGround);
-		grounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, isGround);
-		if (grounded) {
-			jumpTimeCounter = jumpTime;
-		} 
-		else {
-			//If player is in the air, and he is not holding down the jump button, set timer below 0
-			//So if player runs off platform without jumping or releases jump halfway, he can't start jumping again
-			if (!(Input.GetKey (KeyCode.Space) || Input.GetMouseButton (0))) {
-				jumpTimeCounter = -1;
-			}
-		}
+        grounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround);
 
-		myRigidBody.velocity = new Vector2 (moveSpeed, myRigidBody.velocity.y);
+        //Enable movement 
+        myRigidbody.velocity = new Vector2(moveSpeed, myRigidbody.velocity.y);
+        //Enabling jumping
+        if(Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
+        {
+            //Enable jump only when touching the platform
+            if (grounded)
+            {
+                myRigidbody.velocity = new Vector2(myRigidbody.velocity.x, jumpForce);
+                stoppedJumping = false;
+                jumpSound.Play();
+            }
+            //Enable double jump
+            if(!grounded && canDoubleJump)
+            {
+                myRigidbody.velocity = new Vector2(myRigidbody.velocity.x, jumpForce);
+                jumpTimeCounter = jumpTime;
+                stoppedJumping = false;
+                canDoubleJump = false;
+                jumpSound.Play();
+            }
+        }
 
-		if ((Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown (0)) && grounded) {
-			setVelocity (myRigidBody.velocity.x, jumpForce);
-		}
+        if((Input.GetKey (KeyCode.Space) || Input.GetMouseButton(0)) && !stoppedJumping)
+        {
+            if (jumpTimeCounter > 0)
+            {
+                myRigidbody.velocity = new Vector2(myRigidbody.velocity.x, jumpForce);
+                jumpTimeCounter -= Time.deltaTime;
+            }
+        }
+        //Prevents multiple jumps in the air
+        if(Input.GetKeyUp (KeyCode.Space) || Input.GetMouseButtonUp(0))
+        {
+            jumpTimeCounter = 0;
+            stoppedJumping = true;
+        }
+        //reset jumpTimeCounter once player hits the ground
+        if (grounded)
+        {
+            jumpTimeCounter = jumpTime;
+            canDoubleJump = true;
+        }
 
-		//Check for jump press is held down
-		if ((Input.GetKey (KeyCode.Space) || Input.GetMouseButton (0)) && jumpTimeCounter > 0) {
-			setVelocity (myRigidBody.velocity.x, jumpForce);
-			jumpTimeCounter -= Time.deltaTime;
-		}
+        myAnimator.SetFloat("Speed", myRigidbody.velocity.x);
+        myAnimator.SetBool("Grounded", grounded);
+    }
 
-	}
-
-	//Precond: 2 floats representing x and y speed of the character (x, y)
-	//Postcond: speed of the character set to new x and y values
-	void setVelocity(float xspeed, float yspeed){
-		myRigidBody.velocity = new Vector2 (xspeed, yspeed);
-	}
+    void OnCollisionEnter2D(Collision2D other)
+    {
+        if(other.gameObject.tag == "killbox")
+        {
+            theGameManager.RestartGame();
+            deathSound.Play();
+        }
+    }
 }
