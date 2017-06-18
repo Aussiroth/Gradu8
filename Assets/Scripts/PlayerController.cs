@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using System;
 
 public class PlayerController : MonoBehaviour {
     public float moveSpeed;
@@ -9,15 +11,21 @@ public class PlayerController : MonoBehaviour {
     public float jumpTime;
     private float jumpTimeCounter;
 
-    private bool stoppedJumping;
     private bool canDoubleJump;
 
     private Rigidbody2D myRigidbody;
 
-    public bool grounded;
+    public bool groundedCheck1;
+	public bool groundedCheck2;
     public LayerMask whatIsGround;
     public Transform groundCheck;
+	public Transform groundCheck2;
     public float groundCheckRadius;
+
+	//health system stuff
+	public int maxLives;
+	private int currLives;
+	public Text healthText;
 
     
     //private Collider2D myCollider;
@@ -38,39 +46,49 @@ public class PlayerController : MonoBehaviour {
 
         jumpTimeCounter = jumpTime;
 
-        stoppedJumping = true;
+        //stoppedJumping = true;
+
+		currLives = maxLives;
     }
 	
 	// Update is called once per frame
 	void Update () {
         //grounded = Physics2D.IsTouchingLayers(myCollider, whatIsGround);
 
-        grounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround);
+        groundedCheck1 = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround);
+		groundedCheck2 = Physics2D.OverlapCircle(groundCheck2.position, groundCheckRadius, whatIsGround);
+		//do variable updates if char is on the ground
+		if (groundedCheck1 || groundedCheck2)
+		{
+			jumpTimeCounter = -1;
+			canDoubleJump = false;
+		}
 
-        //Enable movement 
+        //X-axis movement
         myRigidbody.velocity = new Vector2(moveSpeed, myRigidbody.velocity.y);
+
         //Enabling jumping
         if(Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
         {
             //Enable jump only when touching the platform
-            if (grounded)
+			if (groundedCheck1 || groundedCheck2)
             {
                 myRigidbody.velocity = new Vector2(myRigidbody.velocity.x, jumpForce);
-                stoppedJumping = false;
+				canDoubleJump = true;
+				jumpTimeCounter = jumpTime;
                 jumpSound.Play();
             }
             //Enable double jump
-            if(!grounded && canDoubleJump)
+            else if (canDoubleJump)
             {
                 myRigidbody.velocity = new Vector2(myRigidbody.velocity.x, jumpForce);
                 jumpTimeCounter = jumpTime;
-                stoppedJumping = false;
                 canDoubleJump = false;
                 jumpSound.Play();
             }
         }
 
-        if((Input.GetKey (KeyCode.Space) || Input.GetMouseButton(0)) && !stoppedJumping)
+        if((Input.GetKey (KeyCode.Space) || Input.GetMouseButton(0)))
         {
             if (jumpTimeCounter > 0)
             {
@@ -78,29 +96,45 @@ public class PlayerController : MonoBehaviour {
                 jumpTimeCounter -= Time.deltaTime;
             }
         }
-        //Prevents multiple jumps in the air
-        if(Input.GetKeyUp (KeyCode.Space) || Input.GetMouseButtonUp(0))
-        {
-            jumpTimeCounter = 0;
-            stoppedJumping = true;
-        }
+		//Prevents multiple jumps in the air
+		if(Input.GetKeyUp (KeyCode.Space) || Input.GetMouseButtonUp(0))
+		{
+			jumpTimeCounter = -1;
+		}
+
         //reset jumpTimeCounter once player hits the ground
-        if (grounded)
-        {
-            jumpTimeCounter = jumpTime;
-            canDoubleJump = true;
-        }
 
         myAnimator.SetFloat("Speed", myRigidbody.velocity.x);
-        myAnimator.SetBool("Grounded", grounded);
+		myAnimator.SetBool("Grounded", groundedCheck1 || groundedCheck2);
+
+		//finally, update the number of lives
+		//healthText.text = "Lives left: " + currLives;
+		healthText.text = Convert.ToString(Time.deltaTime);
     }
 
     void OnCollisionEnter2D(Collision2D other)
     {
-        if(other.gameObject.tag == "killbox")
-        {
-            theGameManager.RestartGame();
-            deathSound.Play();
-        }
+		if (other.gameObject.tag == "killbox") 
+		{
+			theGameManager.RestartGame ();
+			deathSound.Play ();
+		} 
+		else if (other.gameObject.tag == "obstacle") 
+		{
+			//if we run into an obstacle, remove 1 life.
+			//also deactivate the obstacle to prevent multiple life loss
+			currLives-=1;
+			other.gameObject.SetActive (false);
+			//if we run out of lives, kill the character similarly to killbox
+			{
+				theGameManager.RestartGame ();
+				deathSound.Play ();
+			}
+		}
     }
+
+	void Awake()
+	{
+		Application.targetFrameRate = 30;d
+	}
 }

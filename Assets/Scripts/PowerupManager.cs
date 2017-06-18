@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PowerupManager : MonoBehaviour {
 
@@ -20,11 +21,17 @@ public class PowerupManager : MonoBehaviour {
 
     private PlatformDestroyer[] spikeList;
 
+	private int[] storedPowerUps;
+	public Text powerupText;
+
     // Use this for initialization
     void Start () {
         theScoreManager = FindObjectOfType<ScoreManager>();
         thePlatformGenerator = FindObjectOfType<PlatformGenerator>();
         theGameManager = FindObjectOfType<GameManager>();
+		storedPowerUps = new int[2];
+		for (int i = 0; i < storedPowerUps.Length; i++)
+			storedPowerUps [i] = 0;
 	}
 	
 	// Update is called once per frame
@@ -64,6 +71,20 @@ public class PowerupManager : MonoBehaviour {
 
         }
 
+		//Update the shown number of powerups.
+		string powerupOutput = "";
+		for (int i = 0; i < storedPowerUps.Length; i++) 
+		{
+			powerupOutput += storedPowerUps [i] + "\n";
+		}
+		powerupText.text = powerupOutput;
+	}
+
+	//Precond: powerupSelector needs to be within 1 to max number of powerups
+	//Postcond: number of powerups of the type stored by the player is increased by 1.
+	public void IncreasePowerup(int powerupSelector)
+	{
+		storedPowerUps [powerupSelector]++;
 	}
 
     public void ActivatePowerup(bool points, bool safe, float time)
