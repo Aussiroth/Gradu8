@@ -63,6 +63,7 @@
      <Compile Include="Assets\Scripts\PowerUps.cs" />
      <Compile Include="Assets\Scripts\PowerupManager.cs" />
      <Compile Include="Assets\Scripts\ScoreManager.cs" />
+     <Compile Include="Assets\Scripts\SpeedChanger.cs" />
  <Reference Include="Facebook.Unity.Settings">
  <HintPath>C:/Users/Alvin Yan/Documents/GitHub/Gradu8/Library/FacebookSDK/Facebook.Unity.Settings.dll</HintPath>
  </Reference>

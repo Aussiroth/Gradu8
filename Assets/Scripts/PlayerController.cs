@@ -8,6 +8,11 @@ public class PlayerController : MonoBehaviour {
     public float moveSpeed;
     public float jumpForce;
 
+	//for the 3 different speeds
+	public float slowMoveSpeed;
+	public float medMoveSpeed;
+	public float fastMoveSpeed;
+
     public float jumpTime;
     private float jumpTimeCounter;
 
@@ -43,12 +48,10 @@ public class PlayerController : MonoBehaviour {
         //myCollider = GetComponent<Collider2D>();
 
         myAnimator = GetComponent<Animator>();
-
         jumpTimeCounter = jumpTime;
-
         //stoppedJumping = true;
-
 		currLives = maxLives;
+		moveSpeed = medMoveSpeed;
     }
 	
 	// Update is called once per frame
@@ -133,8 +136,21 @@ public class PlayerController : MonoBehaviour {
 		}
     }
 
-	void Awake()
+	//Precond: integer is 1, 2 or 3
+	//Postcond: player speed is set to slow for 1, normal for 2, fast for 3
+	public void setPlayerSpeed(int newSpeed)
 	{
-		Application.targetFrameRate = 30;d
+		switch(newSpeed)
+		{
+		case 1:
+			moveSpeed = slowMoveSpeed;
+			break;
+		case 2:
+			moveSpeed = medMoveSpeed;
+			break;
+		case 3:
+			moveSpeed = fastMoveSpeed;
+			break;
+		}
 	}
 }
