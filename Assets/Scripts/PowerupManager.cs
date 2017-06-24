@@ -9,8 +9,10 @@ public class PowerupManager : MonoBehaviour {
     private bool safeMode;
 
     private bool powerupActive;
+	private int activePowerupNum;
 
     private float powerupLengthCounter;
+	public float powerupTime;
 
     private ScoreManager theScoreManager;
     private PlatformGenerator thePlatformGenerator;
@@ -22,7 +24,8 @@ public class PowerupManager : MonoBehaviour {
     private PlatformDestroyer[] spikeList;
 
 	private int[] storedPowerUps;
-	public Text powerupText;
+	public Text safemodeText;
+	public Text doublePointText;
 
     // Use this for initialization
     void Start () {
@@ -30,6 +33,7 @@ public class PowerupManager : MonoBehaviour {
         thePlatformGenerator = FindObjectOfType<PlatformGenerator>();
         theGameManager = FindObjectOfType<GameManager>();
 		storedPowerUps = new int[2];
+		//0 is double points, 1 is safemode
 		for (int i = 0; i < storedPowerUps.Length; i++)
 			storedPowerUps [i] = 0;
 	}
@@ -41,43 +45,32 @@ public class PowerupManager : MonoBehaviour {
         {
             powerupLengthCounter -= Time.deltaTime;
 
+			//check to turn off powerup if player dies
             if(theGameManager.powerupReset)
             {
                 powerupLengthCounter = 0;
                 theGameManager.powerupReset = false; 
             }
 
-            if(doublePoints)
+            /*if(doublePoints)
             {
                 theScoreManager.pointsPerSecond = normalPointsPerSecond * 2.75f;
                 theScoreManager.shouldDouble = true;
-            }
-
-            if(safeMode)
-            {
-                thePlatformGenerator.randomSpikeThreshold = 0f;
-            }
+            }*/
 
             //resets to normal state once powerup is finished
             if (powerupLengthCounter <= 0)
             {
-                theScoreManager.pointsPerSecond = normalPointsPerSecond;
                 theScoreManager.shouldDouble = false;
-
                 thePlatformGenerator.randomSpikeThreshold = spikeRate;
-
                 powerupActive = false;
             }
 
         }
 
 		//Update the shown number of powerups.
-		string powerupOutput = "";
-		for (int i = 0; i < storedPowerUps.Length; i++) 
-		{
-			powerupOutput += storedPowerUps [i] + "\n";
-		}
-		powerupText.text = powerupOutput;
+		safemodeText.text = storedPowerUps [1].ToString();
+		doublePointText.text = storedPowerUps [0].ToString();
 	}
 
 	//Precond: powerupSelector needs to be within 1 to max number of powerups
@@ -87,26 +80,48 @@ public class PowerupManager : MonoBehaviour {
 		storedPowerUps [powerupSelector]++;
 	}
 
-    public void ActivatePowerup(bool points, bool safe, float time)
-    {
-        doublePoints = points;
-        safeMode = safe;
-        powerupLengthCounter = time;
+	public void ActivatePowerup(int powerupNum)
+	{
+		//Check for powerup
+		if (storedPowerUps [powerupNum] > 0) 
+		{
+			//remove a powerup
+			storedPowerUps[powerupNum]--;
+			//initialise timer on powerup
+			powerupLengthCounter = powerupTime;
+			activePowerupNum = powerupNum;
+			powerupActive = true;
+			//activate relevant powerup
+			switch (powerupNum) {
+			case(0):
+				DoDoublePoints ();
+				break;
+			case(1):
+				DoSafeMode ();
+				break;
+			}
+		}
+	}
 
-        normalPointsPerSecond = theScoreManager.pointsPerSecond;
-        spikeRate = thePlatformGenerator.randomSpikeThreshold;
+	//call when double points powerup activated
+	void DoDoublePoints()
+	{
+		theScoreManager.shouldDouble = true;
+	}
 
-        if (safeMode)
-        {
-            spikeList = FindObjectsOfType<PlatformDestroyer>();
-            for (int i = 0; i < spikeList.Length; i++)
-            {
-                if (spikeList[i].gameObject.name.Contains("Spikes"))
-                {
-                    spikeList[i].gameObject.SetActive(false);
-                }
-            }
-        }
-        powerupActive = true;
-    }
+	//call when safe mode powerup activated
+	void DoSafeMode()
+	{
+		//clear current spikes
+		spikeList = FindObjectsOfType<PlatformDestroyer>();
+		for (int i = 0; i < spikeList.Length; i++)
+		{
+			if (spikeList[i].gameObject.name.Contains("Spikes"))
+			{
+				spikeList[i].gameObject.SetActive(false);
+			}
+		}
+		spikeRate = thePlatformGenerator.randomSpikeThreshold;
+		thePlatformGenerator.randomSpikeThreshold = 0f;
+	}
 }

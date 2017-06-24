@@ -111,8 +111,7 @@ public class PlayerController : MonoBehaviour {
 		myAnimator.SetBool("Grounded", groundedCheck1 || groundedCheck2);
 
 		//finally, update the number of lives
-		//healthText.text = "Lives left: " + currLives;
-		healthText.text = Convert.ToString(Time.deltaTime);
+		healthText.text = "Lives left: " + currLives;
     }
 
     void OnCollisionEnter2D(Collision2D other)
@@ -122,19 +121,24 @@ public class PlayerController : MonoBehaviour {
 			theGameManager.RestartGame ();
 			deathSound.Play ();
 		} 
-		else if (other.gameObject.tag == "obstacle") 
+    }
+
+	void OnTriggerEnter2D(Collider2D other)
+	{
+		if (other.gameObject.tag == "obstacle") 
 		{
 			//if we run into an obstacle, remove 1 life.
 			//also deactivate the obstacle to prevent multiple life loss
 			currLives-=1;
 			other.gameObject.SetActive (false);
 			//if we run out of lives, kill the character similarly to killbox
+			if (currLives <= 0)
 			{
 				theGameManager.RestartGame ();
 				deathSound.Play ();
 			}
 		}
-    }
+	}
 
 	//Precond: integer is 1, 2 or 3
 	//Postcond: player speed is set to slow for 1, normal for 2, fast for 3

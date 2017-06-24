@@ -30,7 +30,10 @@ public class ScoreManager : MonoBehaviour {
 
         if (scoreIncreasing)
         {
-            scoreCount += pointsPerSecond * Time.deltaTime;
+			if (shouldDouble)
+				scoreCount += pointsPerSecond * 255 * Time.deltaTime;
+			else
+            	scoreCount += pointsPerSecond * Time.deltaTime;
         }
 
         if(scoreCount > hiScoreCount)
@@ -47,9 +50,9 @@ public class ScoreManager : MonoBehaviour {
     public void AddScore(int pointsToAdd)
     {
         if(shouldDouble)
-        {
             pointsToAdd = pointsToAdd * 2;
-        }
         scoreCount += pointsToAdd;
     }
+
+
 }
