@@ -22,6 +22,8 @@ public class PlayerController : MonoBehaviour {
 
     public bool groundedCheck1;
 	public bool groundedCheck2;
+	private bool justJumped;
+	private bool grounded;
     public LayerMask whatIsGround;
     public Transform groundCheck;
 	public Transform groundCheck2;
@@ -52,6 +54,7 @@ public class PlayerController : MonoBehaviour {
         //stoppedJumping = true;
 		currLives = maxLives;
 		moveSpeed = medMoveSpeed;
+		justJumped = false;
     }
 	
 	// Update is called once per frame
@@ -61,11 +64,21 @@ public class PlayerController : MonoBehaviour {
         groundedCheck1 = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround);
 		groundedCheck2 = Physics2D.OverlapCircle(groundCheck2.position, groundCheckRadius, whatIsGround);
 		//do variable updates if char is on the ground
-		if (groundedCheck1 || groundedCheck2)
+		if (groundedCheck1 || groundedCheck2) 
 		{
-			jumpTimeCounter = -1;
-			canDoubleJump = false;
+			//if he just jumped, then dont ground, else ground him
+			if (justJumped == false)
+			{
+				jumpTimeCounter = -1;
+				canDoubleJump = false;
+			}
+			//then switch justjumped to false again
+			else
+				justJumped = false;
 		}
+		//if player is in the air, then disable the justJumped since its not needed anymore
+		else
+			justJumped = false;
 
         //X-axis movement
         myRigidbody.velocity = new Vector2(moveSpeed, myRigidbody.velocity.y);
@@ -80,6 +93,7 @@ public class PlayerController : MonoBehaviour {
 				canDoubleJump = true;
 				jumpTimeCounter = jumpTime;
                 jumpSound.Play();
+				justJumped = true;
             }
             //Enable double jump
             else if (canDoubleJump)

@@ -12,10 +12,11 @@ public class ScoreManager : MonoBehaviour {
     public float hiScoreCount;
 
     public float pointsPerSecond;
+	public int powerupMultiplier;
 
     public bool scoreIncreasing;
 
-    public bool shouldDouble;
+    public bool scorePowerup;
 
 	// Use this for initialization
 	void Start () {
@@ -23,6 +24,7 @@ public class ScoreManager : MonoBehaviour {
         {
             hiScoreCount = PlayerPrefs.GetFloat("HighScore");
         }
+		powerupMultiplier = 4;
 	}
 	
 	// Update is called once per frame
@@ -30,8 +32,8 @@ public class ScoreManager : MonoBehaviour {
 
         if (scoreIncreasing)
         {
-			if (shouldDouble)
-				scoreCount += pointsPerSecond * 255 * Time.deltaTime;
+			if (scorePowerup)
+				scoreCount += pointsPerSecond * powerupMultiplier * Time.deltaTime;
 			else
             	scoreCount += pointsPerSecond * Time.deltaTime;
         }
@@ -49,10 +51,8 @@ public class ScoreManager : MonoBehaviour {
 
     public void AddScore(int pointsToAdd)
     {
-        if(shouldDouble)
-            pointsToAdd = pointsToAdd * 2;
+        if(scorePowerup)
+			pointsToAdd = pointsToAdd * powerupMultiplier;
         scoreCount += pointsToAdd;
     }
-
-
 }

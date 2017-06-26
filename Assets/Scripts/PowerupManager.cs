@@ -33,7 +33,9 @@ public class PowerupManager : MonoBehaviour {
         thePlatformGenerator = FindObjectOfType<PlatformGenerator>();
         theGameManager = FindObjectOfType<GameManager>();
 		storedPowerUps = new int[2];
+
 		//0 is double points, 1 is safemode
+
 		for (int i = 0; i < storedPowerUps.Length; i++)
 			storedPowerUps [i] = 0;
 	}
@@ -52,17 +54,13 @@ public class PowerupManager : MonoBehaviour {
                 theGameManager.powerupReset = false; 
             }
 
-            /*if(doublePoints)
-            {
-                theScoreManager.pointsPerSecond = normalPointsPerSecond * 2.75f;
-                theScoreManager.shouldDouble = true;
-            }*/
-
             //resets to normal state once powerup is finished
             if (powerupLengthCounter <= 0)
             {
-                theScoreManager.shouldDouble = false;
-                thePlatformGenerator.randomSpikeThreshold = spikeRate;
+				if (activePowerupNum == 0)
+                	theScoreManager.scorePowerup = false;
+				else
+                	thePlatformGenerator.randomSpikeThreshold = spikeRate;
                 powerupActive = false;
             }
 
@@ -106,7 +104,7 @@ public class PowerupManager : MonoBehaviour {
 	//call when double points powerup activated
 	void DoDoublePoints()
 	{
-		theScoreManager.shouldDouble = true;
+		theScoreManager.scorePowerup = true;
 	}
 
 	//call when safe mode powerup activated
