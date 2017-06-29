@@ -13,12 +13,14 @@ public class PauseMenu : MonoBehaviour {
     {
         Time.timeScale = 0f;//stop the scoring system when paused
         pauseMenu.SetActive(true);
+        FindObjectOfType<JellyManager>().isPaused = true;
     }
 
     public void ResumeGame()
     {
         Time.timeScale = 1f;//resume scoring system
         pauseMenu.SetActive(false);
+        FindObjectOfType<JellyManager>().isPaused = false;
     }
 
     public void RestartGame()
@@ -31,7 +33,7 @@ public class PauseMenu : MonoBehaviour {
     public void QuitToMain()
     {
         Time.timeScale = 1f;
-        //Application.LoadLevel(mainMenuLevel);
-		SceneManager.LoadScene(mainMenuLevel);
+        SceneManager.LoadScene(mainMenuLevel);
+       //Application.LoadLevel(mainMenuLevel);
     }
 }

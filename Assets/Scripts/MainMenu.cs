@@ -9,8 +9,8 @@ public class MainMenu : MonoBehaviour {
 
 	public void PlayGame()
     {
-        //Application.LoadLevel (playGameLevel);
-		SceneManager.LoadScene(playGameLevel);
+        SceneManager.LoadScene(playGameLevel);
+        //Application.LoadLevel (playGameLevel); //obsolete
     }
 
     public void QuitGame()

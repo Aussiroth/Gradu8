@@ -8,12 +8,12 @@ public class PowerupActivator : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
+		thePowerupManager = FindObjectOfType<PowerupManager>();
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
-		
+
 	}
 
 	public void activateDoublePoints()

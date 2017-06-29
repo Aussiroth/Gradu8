@@ -2,36 +2,37 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityStandardAssets.CrossPlatformInput;
 
 public class PowerupManager : MonoBehaviour {
 
-    private bool doublePoints;
-    private bool safeMode;
+	private bool doublePoints;
+	private bool safeMode;
 
-    private bool powerupActive;
+	private bool powerupActive;
 	private int activePowerupNum;
 
-    private float powerupLengthCounter;
+	private float powerupLengthCounter;
 	public float powerupTime;
 
-    private ScoreManager theScoreManager;
-    private PlatformGenerator thePlatformGenerator;
-    private GameManager theGameManager;
+	private ScoreManager theScoreManager;
+	private PlatformGenerator thePlatformGenerator;
+	private GameManager theGameManager;
 
-    private float normalPointsPerSecond;
-    private float spikeRate;
+	private float normalPointsPerSecond;
+	private float spikeRate;
 
-    private PlatformDestroyer[] spikeList;
+	private PlatformDestroyer[] spikeList;
 
 	private int[] storedPowerUps;
 	public Text safemodeText;
 	public Text doublePointText;
 
-    // Use this for initialization
-    void Start () {
-        theScoreManager = FindObjectOfType<ScoreManager>();
-        thePlatformGenerator = FindObjectOfType<PlatformGenerator>();
-        theGameManager = FindObjectOfType<GameManager>();
+	// Use this for initialization
+	void Start () {
+		theScoreManager = FindObjectOfType<ScoreManager>();
+		thePlatformGenerator = FindObjectOfType<PlatformGenerator>();
+		theGameManager = FindObjectOfType<GameManager>();
 		storedPowerUps = new int[2];
 
 		//0 is double points, 1 is safemode
@@ -39,36 +40,46 @@ public class PowerupManager : MonoBehaviour {
 		for (int i = 0; i < storedPowerUps.Length; i++)
 			storedPowerUps [i] = 0;
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 
-        if (powerupActive)
-        {
-            powerupLengthCounter -= Time.deltaTime;
+		if (powerupActive)
+		{
+			powerupLengthCounter -= Time.deltaTime;
 
 			//check to turn off powerup if player dies
-            if(theGameManager.powerupReset)
-            {
-                powerupLengthCounter = 0;
-                theGameManager.powerupReset = false; 
-            }
+			if(theGameManager.powerupReset)
+			{
+				powerupLengthCounter = 0;
+				theGameManager.powerupReset = false; 
+			}
 
-            //resets to normal state once powerup is finished
-            if (powerupLengthCounter <= 0)
-            {
+			//resets to normal state once powerup is finished
+			if (powerupLengthCounter <= 0)
+			{
 				if (activePowerupNum == 0)
-                	theScoreManager.scorePowerup = false;
+					theScoreManager.scorePowerup = false;
 				else
-                	thePlatformGenerator.randomSpikeThreshold = spikeRate;
-                powerupActive = false;
-            }
+					thePlatformGenerator.randomSpikeThreshold = spikeRate;
+				powerupActive = false;
+			}
 
-        }
+		}
 
 		//Update the shown number of powerups.
 		safemodeText.text = storedPowerUps [1].ToString();
 		doublePointText.text = storedPowerUps [0].ToString();
+
+		//Test dual touch control powerup activation
+		if(CrossPlatformInputManager.GetButtonDown("DoublePoints"))
+		{
+			ActivatePowerup(0);
+		}
+		else if(CrossPlatformInputManager.GetButtonDown("SafeMode"))
+		{
+			ActivatePowerup(1);
+		}
 	}
 
 	//Precond: powerupSelector needs to be within 1 to max number of powerups

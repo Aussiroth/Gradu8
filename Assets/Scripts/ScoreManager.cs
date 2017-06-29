@@ -7,24 +7,25 @@ public class ScoreManager : MonoBehaviour {
 
     public Text scoreText;
     public Text hiScoreText;
+    public Text jellyScoreText;
 
     public float scoreCount;
     public float hiScoreCount;
+    public int jellyScoreCount;
 
     public float pointsPerSecond;
 	public int powerupMultiplier;
 
     public bool scoreIncreasing;
-
-    public bool scorePowerup;
-
-	// Use this for initialization
+	public bool scorePowerup;
+   
+    // Use this for initialization
 	void Start () {
 		if(PlayerPrefs.HasKey("HighScore"))
-        {
-            hiScoreCount = PlayerPrefs.GetFloat("HighScore");
-        }
-		powerupMultiplier = 4;
+		{
+			hiScoreCount = PlayerPrefs.GetFloat("HighScore");
+		}
+		//powerupMultiplier = 4;
 	}
 	
 	// Update is called once per frame
@@ -33,9 +34,9 @@ public class ScoreManager : MonoBehaviour {
         if (scoreIncreasing)
         {
 			if (scorePowerup)
-				scoreCount += pointsPerSecond * powerupMultiplier * Time.deltaTime;
+				scoreCount += pointsPerSecond * Time.deltaTime * powerupMultiplier;
 			else
-            	scoreCount += pointsPerSecond * Time.deltaTime;
+				scoreCount += pointsPerSecond * Time.deltaTime;
         }
 
         if(scoreCount > hiScoreCount)
@@ -46,13 +47,28 @@ public class ScoreManager : MonoBehaviour {
 
         scoreText.text = "score : " + Mathf.Round(scoreCount);
         hiScoreText.text = "High Score : " + Mathf.Round(hiScoreCount);
+        jellyScoreText.text = jellyScoreCount.ToString();
 
-	}
+    }
 
     public void AddScore(int pointsToAdd)
     {
-        if(scorePowerup)
+		if(scorePowerup)
+        {
 			pointsToAdd = pointsToAdd * powerupMultiplier;
+        }
         scoreCount += pointsToAdd;
+    }
+
+    public void JellyScore(int scoreAmount)
+    {
+        jellyScoreCount += scoreAmount;
+        
+    }
+
+    public void BombDeduct(int bombAmount)
+    {
+        jellyScoreCount -= bombAmount;
+
     }
 }

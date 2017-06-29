@@ -10,8 +10,7 @@ public class PlatformDestroyer : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         //The find object needs to be exactly the same as the ones created under the main camera which has capital 'P'
-        platformDestructionPoint = GameObject.Find("PlatformDestructionPoint");
-
+       platformDestructionPoint = GameObject.Find("PlatformDestructionPoint");
     }
 	
 	// Update is called once per frame
