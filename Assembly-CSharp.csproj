@@ -51,6 +51,7 @@
      <Compile Include="Assets\ScriptDraft\Parallexing.cs" />
      <Compile Include="Assets\ScriptDraft\ScrollingBackground.cs" />
      <Compile Include="Assets\ScriptDraft\TouchControls.cs" />
+     <Compile Include="Assets\Scripts\AttackWeapon.cs" />
      <Compile Include="Assets\Scripts\BackgroundScroll.cs" />
      <Compile Include="Assets\Scripts\Bomb.cs" />
      <Compile Include="Assets\Scripts\BombManager.cs" />
@@ -75,7 +76,7 @@
      <None Include="Assets\Standard Assets\Fonts\OpenSans\License!.txt" />
      <None Include="Assets\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
  <Reference Include="Facebook.Unity.Settings">
- <HintPath>C:/Users/Alvin Yan/Desktop/Gradu8/Library/FacebookSDK/Facebook.Unity.Settings.dll</HintPath>
+ <HintPath>C:/Users/Alvin Yan/Documents/GitHub/Gradu8/Library/FacebookSDK/Facebook.Unity.Settings.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.UI">
  <HintPath>D:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
