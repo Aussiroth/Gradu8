@@ -21,14 +21,7 @@ public class PowerUps : MonoBehaviour {
 
 	//Change the respective powerup colour respectively
 	void Awake () {
-		powerupSelector = Random.Range(0, 2);
-
-		switch (powerupSelector)
-		{
-		case 0: doublePoints = true; break;
-
-		case 1: safeMode = true; break;
-		}
+		powerupSelector = Random.Range(0, 3);
 
 		GetComponent<SpriteRenderer>().sprite = powerupSprites[powerupSelector];
 	}

@@ -27,15 +27,19 @@ public class PowerupManager : MonoBehaviour {
 	private int[] storedPowerUps;
 	public Text safemodeText;
 	public Text doublePointText;
+	public Text weaponText;
+
+	private WeaponManager theWeaponManager;
 
 	// Use this for initialization
 	void Start () {
 		theScoreManager = FindObjectOfType<ScoreManager>();
 		thePlatformGenerator = FindObjectOfType<PlatformGenerator>();
 		theGameManager = FindObjectOfType<GameManager>();
-		storedPowerUps = new int[2];
+		theWeaponManager = FindObjectOfType<WeaponManager>();
+		storedPowerUps = new int[3];
 
-		//0 is double points, 1 is safemode
+		//0 is double points, 1 is safemode, 2 is weapon
 
 		for (int i = 0; i < storedPowerUps.Length; i++)
 			storedPowerUps [i] = 0;
@@ -67,10 +71,6 @@ public class PowerupManager : MonoBehaviour {
 
 		}
 
-		//Update the shown number of powerups.
-		safemodeText.text = storedPowerUps [1].ToString();
-		doublePointText.text = storedPowerUps [0].ToString();
-
 		//Test dual touch control powerup activation
 		if(CrossPlatformInputManager.GetButtonDown("DoublePoints"))
 		{
@@ -80,6 +80,20 @@ public class PowerupManager : MonoBehaviour {
 		{
 			ActivatePowerup(1);
 		}
+		else if (CrossPlatformInputManager.GetButtonDown("Weapon"))
+		{
+			//Check for weapon
+			if (storedPowerUps [2] > 0) 
+			{
+				storedPowerUps[2]--;
+				//fire weapon
+				theWeaponManager.fireWeapon();
+			}
+		}
+		//Update the shown number of powerups.
+		doublePointText.text = storedPowerUps [0].ToString();
+		safemodeText.text = storedPowerUps [1].ToString();
+		weaponText.text = storedPowerUps[2].ToString();
 	}
 
 	//Precond: powerupSelector needs to be within 1 to max number of powerups

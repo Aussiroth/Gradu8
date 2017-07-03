@@ -15,6 +15,7 @@ public class AttackWeapon : MonoBehaviour {
 	void Start () {
 		myRigidBody = GetComponent<Rigidbody2D>();
 		thePlayer = FindObjectOfType<PlayerController>();
+		platformGenerationPoint = GameObject.Find("PlatformGenerationPoint");
 	}
 	
 	// Update is called once per frame
@@ -25,7 +26,7 @@ public class AttackWeapon : MonoBehaviour {
 
 		//Since weapons go right, we destroy them when we reach platform creator (ahead of player)
 		//Instead of the usual destruction script
-		if (gameObject.transform.position.x > platformGenerationPoint.transform.position.x)
+		if (transform.position.x > platformGenerationPoint.transform.position.x)
 		{
 			gameObject.SetActive(false);
 		}
