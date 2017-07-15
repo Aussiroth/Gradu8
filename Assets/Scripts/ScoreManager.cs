@@ -8,10 +8,14 @@ public class ScoreManager : MonoBehaviour {
     public Text scoreText;
     public Text hiScoreText;
     public Text jellyScoreText;
+    public Image[] lifepoints;
+
+    public AudioSource deathSound;
 
     public float scoreCount;
     public float hiScoreCount;
     public int jellyScoreCount;
+    public int lifepoint;
 
     public float pointsPerSecond;
 	public int powerupMultiplier;
@@ -69,6 +73,20 @@ public class ScoreManager : MonoBehaviour {
     public void BombDeduct(int bombAmount)
     {
         jellyScoreCount -= bombAmount;
+
+    }
+
+    public void LoseLife()
+    {
+        lifepoint--;
+
+        if (lifepoint == 0)
+        {
+            FindObjectOfType<GameManager>().DeathScene();
+            deathSound.Play();
+        }
+        if ((lifepoint - 1) >= 0)
+            lifepoints[lifepoint - 1].enabled = false;
 
     }
 }

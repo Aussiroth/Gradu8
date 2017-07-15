@@ -10,7 +10,7 @@ public class JellyManager : MonoBehaviour {
     public GameObject jellyPrefab;
 
     private float lastSpawn;
-    private float deltaSpawn = 0.5f;
+    private float deltaSpawn;
     //private float deltaSpawn = Random.Range(1.0f,3.0f); //will result in melon spam
 
     //public static JellyManager Instance { set; get;} //create an instance of the JellyManager since JellyManager is not static
@@ -24,10 +24,10 @@ public class JellyManager : MonoBehaviour {
     private Collider2D[] jelliesCols;
    
     //UI variables
-  //  private int score;
-    private int lifepoint;
-  //  public Text scoreText;
-    public Image[] lifepoints;
+    //private int score;
+    //private int lifepoint;
+    //public Text scoreText;
+    //public Image[] lifepoints;
 
     private void Awake()
     {
@@ -37,26 +37,19 @@ public class JellyManager : MonoBehaviour {
     private void Start()
     {
         jelliesCols = new Collider2D[0];
-        //isPaused = false;
-    }
-
-    private void NewGame()
-    {
-      //  score = 0;
-        lifepoint = 3;
         isPaused = false;
     }
 
     private void Update()
     {
-        Debug.Log(isPaused);
-        if(isPaused)
+        if (isPaused)
             return;
- 
-        if(Time.time - lastSpawn > deltaSpawn)
+
+        deltaSpawn = Random.Range(0f, 5.0f);
+        if (Time.time - lastSpawn > deltaSpawn)
         {
             Jelly j = GetJelly();
-            
+
             j.LaunchJelly(Random.Range(5.0f, 5.0f), Random.Range(-3.0f, 3.0f), spawnPoint.transform.position);
             lastSpawn = Time.time;
         }
@@ -66,24 +59,24 @@ public class JellyManager : MonoBehaviour {
             Vector3 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             pos.z = -1;
             trail.transform.position = pos;
-            
-                Collider2D[] thisFrameJelly = Physics2D.OverlapPointAll(new Vector2(pos.x, pos.y), LayerMask.GetMask("Jelly"));         
-             // if((Input.mousePosition - lastMousePos).sqrMagnitude > REQUIRED_SLICEFORCE)
-             //  {
-                foreach(Collider2D c2 in thisFrameJelly)
+
+            Collider2D[] thisFrameJelly = Physics2D.OverlapPointAll(new Vector2(pos.x, pos.y), LayerMask.GetMask("Jelly"));
+            // if((Input.mousePosition - lastMousePos).sqrMagnitude > REQUIRED_SLICEFORCE)
+            //  {
+            foreach (Collider2D c2 in thisFrameJelly)
+            {
+                for (int i = 0; i < jelliesCols.Length; i++)
                 {
-                    for(int i = 0; i < jelliesCols.Length; i++)
+                    if (c2 == jelliesCols[i])
                     {
-                        if(c2 == jelliesCols[i])
-                        {
-                            c2.GetComponent<Jelly>().Slice();
-                        }
+                        c2.GetComponent<Jelly>().Slice();
                     }
                 }
-             // }
-             //lastMousePos = Input.mousePosition;
-                jelliesCols = thisFrameJelly;
-           
+            }
+            // }
+            //lastMousePos = Input.mousePosition;
+            jelliesCols = thisFrameJelly;
+
         }
     }
 
@@ -97,7 +90,7 @@ public class JellyManager : MonoBehaviour {
     {
         Jelly j = jellies.Find(x => !x.IsActive);
 
-        if(j == null)
+        if (j == null)
         {
             j = Instantiate(jellyPrefab).GetComponent<Jelly>();
             jellies.Add(j);
@@ -105,5 +98,4 @@ public class JellyManager : MonoBehaviour {
 
         return j;
     }
-
 }

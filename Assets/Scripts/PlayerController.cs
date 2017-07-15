@@ -119,8 +119,17 @@ public class PlayerController : MonoBehaviour {
     {
         if(other.gameObject.tag == "killbox")
         {
-            theGameManager.RestartGame();
+            theGameManager.DeathScene();
             deathSound.Play();
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "enemy")
+        {
+            FindObjectOfType<ScoreManager>().LoseLife();
+            collision.gameObject.SetActive(false);
         }
     }
 

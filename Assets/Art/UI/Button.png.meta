@@ -1,12 +1,13 @@
 fileFormatVersion: 2
 guid: f776fc871b2b59d4cbb297006cfb3fc9
-timeCreated: 1497941033
+timeCreated: 1499939480
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
     21300000: Button_2
     21300002: Button_0
     21300004: Button_1
+    21300006: Pause
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -116,6 +117,19 @@ TextureImporter:
         height: 181
       alignment: 9
       pivot: {x: 0.58360445, y: 0.4522277}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Pause
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2993
+        width: 179
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0

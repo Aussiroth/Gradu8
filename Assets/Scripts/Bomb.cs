@@ -75,6 +75,7 @@ public class Bomb: MonoBehaviour {
         speed = speed * 0.5f;
         isSliced = true;
 
-        bManager.BombDeduct(10);         
+        bManager.BombDeduct(5);
+        FindObjectOfType<ScoreManager>().LoseLife();
     }
 }

@@ -1,11 +1,14 @@
 fileFormatVersion: 2
 guid: f42c79a01d404e4459924bd0fafa37d8
-timeCreated: 1498067561
+timeCreated: 1499934952
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
     21300000: spritesheet_items_0
     21300002: star
+    21300004: spritesheet_items_1
+    21300006: spritesheet_items_2
+    21300008: spritesheet_items_3
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -101,6 +104,45 @@ TextureImporter:
         width: 63
         height: 64
       alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: spritesheet_items_1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 125
+        width: 118
+        height: 126
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: spritesheet_items_2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 254
+        width: 118
+        height: 126
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: spritesheet_items_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 118
+        height: 126
+      alignment: 6
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []

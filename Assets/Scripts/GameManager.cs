@@ -31,18 +31,44 @@ public class GameManager : MonoBehaviour {
 		
 	}
 
-    public void RestartGame()
+    public void DeathScene()
     {
+        Time.timeScale = 0f;
+
+        JellyManager[] j = FindObjectsOfType(typeof(JellyManager)) as JellyManager[];
+        foreach (JellyManager jelly in j)
+        {
+            jelly.isPaused = true;
+        }
+
+        FindObjectOfType<BombManager>().isPaused = true;
+
         theScoreManager.scoreIncreasing = false;
         thePlayer.gameObject.SetActive(false);
 
         theDeathScreen.gameObject.SetActive(true);
-        
+
         //StartCoroutine("RestartGameCo");//calls the RestartGameCo() method
     }
 
     public void Reset()
     {
+        theScoreManager.lifepoint = 4;
+        for (int i = 0; i < theScoreManager.lifepoint - 1; i++)
+        {
+            theScoreManager.lifepoints[i].enabled = true;
+        }
+
+        Time.timeScale = 1f;
+
+        JellyManager[] j = FindObjectsOfType(typeof(JellyManager)) as JellyManager[];
+        foreach (JellyManager jelly in j)
+        {
+            jelly.isPaused = false;
+        }
+
+        FindObjectOfType<BombManager>().isPaused = false;
+
         theDeathScreen.gameObject.SetActive(false);
         platformList = FindObjectsOfType<PlatformDestroyer>();
         for (int i = 0; i < platformList.Length; i++)
@@ -60,7 +86,7 @@ public class GameManager : MonoBehaviour {
 
         powerupReset = true;
     }
-
+    
     /* //Method to restart game
      public IEnumerator RestartGameCo()
      {

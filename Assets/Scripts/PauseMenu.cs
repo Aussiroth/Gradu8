@@ -11,16 +11,35 @@ public class PauseMenu : MonoBehaviour {
 
     public void PauseGame()
     {
-        Time.timeScale = 0f;//stop the scoring system when paused
+        //stop the scoring system when paused
+        Time.timeScale = 0f;
+
         pauseMenu.SetActive(true);
-        FindObjectOfType<JellyManager>().isPaused = true;
+
+        //Need to pause every JellyManager scripts since there are more than 1 JellyManager present
+        JellyManager[] j = FindObjectsOfType(typeof(JellyManager)) as JellyManager[];
+        foreach (JellyManager jelly in j)
+        {
+            jelly.isPaused = true;
+        }
+
+        FindObjectOfType<BombManager>().isPaused = true;
     }
 
     public void ResumeGame()
     {
-        Time.timeScale = 1f;//resume scoring system
+        //resume scoring system
+        Time.timeScale = 1f;
+
         pauseMenu.SetActive(false);
-        FindObjectOfType<JellyManager>().isPaused = false;
+
+        JellyManager[] j = FindObjectsOfType(typeof(JellyManager)) as JellyManager[];
+        foreach (JellyManager jelly in j)
+        {
+            jelly.isPaused = false;
+        }
+
+        FindObjectOfType<BombManager>().isPaused = false;
     }
 
     public void RestartGame()
@@ -34,6 +53,6 @@ public class PauseMenu : MonoBehaviour {
     {
         Time.timeScale = 1f;
         SceneManager.LoadScene(mainMenuLevel);
-       //Application.LoadLevel(mainMenuLevel);
+        //Application.LoadLevel(mainMenuLevel);
     }
 }
