@@ -32,7 +32,4 @@ public class AttackWeapon : MonoBehaviour {
 		}
 	}
 
-	public void OnTriggerEnter2D(Collider2D other)
-	{
-	}
 }

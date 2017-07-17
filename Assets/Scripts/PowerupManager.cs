@@ -42,7 +42,8 @@ public class PowerupManager : MonoBehaviour {
 		//0 is double points, 1 is safemode, 2 is weapon
 
 		for (int i = 0; i < storedPowerUps.Length; i++)
-			storedPowerUps [i] = 0;
+			//for testing
+			storedPowerUps [i] = 10;
 	}
 
 	// Update is called once per frame

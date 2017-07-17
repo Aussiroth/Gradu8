@@ -21,7 +21,7 @@ public class Jelly : MonoBehaviour {
     private float spriteUpdateDelta = 0.125f;
     private float rotationSpeed;
 
-    public void Start()
+    public void Awake()
     {
         jManager = FindObjectOfType<ScoreManager>();
     }
@@ -77,6 +77,14 @@ public class Jelly : MonoBehaviour {
 
         //JellyManager.Instance.IncrementScore(1);
          jManager.JellyScore(1);
-         
     }
+
+	public void OnTriggerEnter2D(Collider2D other)
+	{
+		//Do weapon collision check here so it can easily call slice function
+		if (other.gameObject.tag == "weapon")
+		{
+			Slice();
+		}
+	}
 }

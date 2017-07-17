@@ -62,7 +62,7 @@ public class JellyManager : MonoBehaviour {
 
             Collider2D[] thisFrameJelly = Physics2D.OverlapPointAll(new Vector2(pos.x, pos.y), LayerMask.GetMask("Jelly"));
             // if((Input.mousePosition - lastMousePos).sqrMagnitude > REQUIRED_SLICEFORCE)
-            //  {
+            //  {	
             foreach (Collider2D c2 in thisFrameJelly)
             {
                 for (int i = 0; i < jelliesCols.Length; i++)
