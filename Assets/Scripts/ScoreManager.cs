@@ -73,7 +73,6 @@ public class ScoreManager : MonoBehaviour {
     public void BombDeduct(int bombAmount)
     {
         jellyScoreCount -= bombAmount;
-
     }
 
     public void LoseLife()

@@ -42,7 +42,7 @@ public class PowerupManager : MonoBehaviour {
 		//0 is double points, 1 is safemode, 2 is weapon
 
 		for (int i = 0; i < storedPowerUps.Length; i++)
-			//for testing
+			//for testing, set to 10
 			storedPowerUps [i] = 10;
 	}
 

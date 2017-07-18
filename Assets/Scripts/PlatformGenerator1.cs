@@ -49,6 +49,8 @@ public class PlatformGenerator1 : MonoBehaviour {
         maxHeight = maxHeightPoint.position.y;
 
         theCoinGenerator = FindObjectOfType<CoinGenerator>();
+
+		transform.position = new Vector3(transform.position.x + 4.5f, transform.position.y, transform.position.z);
     }
 
     // Update is called once per frame
