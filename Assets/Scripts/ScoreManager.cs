@@ -22,7 +22,7 @@ public class ScoreManager : MonoBehaviour {
 
     public bool scoreIncreasing;
 	public bool scorePowerup;
-   
+
     // Use this for initialization
 	void Start () {
 		if(PlayerPrefs.HasKey("HighScore"))
@@ -84,8 +84,31 @@ public class ScoreManager : MonoBehaviour {
             FindObjectOfType<GameManager>().DeathScene();
             deathSound.Play();
         }
-        if ((lifepoint - 1) >= 0)
-            lifepoints[lifepoint - 1].enabled = false;
 
+        if ((lifepoint - 1) >= 0)
+             lifepoints[lifepoint - 1].enabled = false;
+
+    }
+
+    public void AddLife()
+    {
+        lifepoint++;
+
+        if(lifepoint >= 4)
+        {
+            lifepoint = 4;
+        }
+
+        lifepoints[lifepoint - 2].enabled = true;
+    }
+
+    public void FullLife()
+    {
+        lifepoint = 4;
+
+        for (int i = 0; i < lifepoint - 1; i++)
+        {
+            lifepoints[i].enabled = true;
+        }
     }
 }

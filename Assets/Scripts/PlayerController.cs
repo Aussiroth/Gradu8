@@ -33,6 +33,7 @@ public class PlayerController : MonoBehaviour {
 
     public AudioSource jumpSound;
     public AudioSource deathSound;
+    public AudioSource dragonSound;
 
 	// Use this for initialization
 	void Start () {
@@ -69,6 +70,7 @@ public class PlayerController : MonoBehaviour {
 
         //Enable movement 
         myRigidbody.velocity = new Vector2(moveSpeed, myRigidbody.velocity.y);
+        
         //Enabling jumping
         if(CrossPlatformInputManager.GetButtonDown("Jump")) // || Input.GetMouseButtonDown(0))
         {
@@ -120,7 +122,7 @@ public class PlayerController : MonoBehaviour {
         if(other.gameObject.tag == "killbox")
         {
             theGameManager.DeathScene();
-            deathSound.Play();
+            deathSound.Play();          
         }
     }
 
@@ -131,6 +133,34 @@ public class PlayerController : MonoBehaviour {
             FindObjectOfType<ScoreManager>().LoseLife();
             collision.gameObject.SetActive(false);
         }
+
+        if (collision.gameObject.tag == "warning")
+        {
+            FindObjectOfType<SoundManager>().DragonRoar();
+
+            FindObjectOfType<DeadlineController>().AddSpeed(3);
+            StartCoroutine("Delay");
+            
+
+        }
+
+        if (collision.gameObject.tag == "killbox")
+        {
+            theGameManager.DeathScene();
+            deathSound.Play();
+
+            FindObjectOfType<SoundManager>().DragonMute();
+            dragonSound.Play();
+
+            
+        }
+
+    }
+
+    IEnumerator Delay()
+    {
+        yield return new WaitForSeconds(3.0f);
+        FindObjectOfType<DeadlineController>().ReduceSpeed(3);
     }
 
     /*

@@ -7,8 +7,11 @@ public class WeaponManager : MonoBehaviour {
 	public ObjectPooler weaponPool;
 	private PlayerController thePlayer;
 
-	// Use this for initialization
-	void Start () {
+    public GameObject fullScreen;
+    public GameObject timeHack;
+
+    // Use this for initialization
+    void Start () {
 		thePlayer = FindObjectOfType<PlayerController> ();
 	}
 	
@@ -26,4 +29,33 @@ public class WeaponManager : MonoBehaviour {
 		newWeapon.transform.position = new Vector3(thePlayer.transform.position.x, thePlayer.transform.position.y + 1.0f, thePlayer.transform.position.z);
 		newWeapon.SetActive(true);
 	}
+
+    public void FullAttack()
+    {
+        fullScreen.SetActive(true);
+        StartCoroutine("Delay");
+
+    }
+
+    IEnumerator Delay()
+    {
+        yield return new WaitForSeconds(1.0f);
+        fullScreen.SetActive(false);
+    }
+
+    public void TimeHack()
+    {
+        timeHack.SetActive(true);
+        Time.timeScale = 0f;
+
+        StartCoroutine("TimeStop");
+    }
+
+    IEnumerator TimeStop()
+    {
+        yield return new WaitForSecondsRealtime(2.5f);
+
+        Time.timeScale = 1f;
+        timeHack.SetActive(false);
+    }
 }

@@ -130,6 +130,7 @@ public class PowerupManager : MonoBehaviour {
 	//call when double points powerup activated
 	void DoDoublePoints()
 	{
+        theWeaponManager.TimeHack();
 		theScoreManager.scorePowerup = true;
 	}
 
