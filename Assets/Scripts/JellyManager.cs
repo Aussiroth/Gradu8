@@ -18,7 +18,7 @@ public class JellyManager : MonoBehaviour {
     public Transform trail;
     public GameObject spawnPoint;
     public bool isPaused;
-
+  
     //private const float REQUIRED_SLICEFORCE = 0.0f;
     //private Vector3 lastMousePos;
     private Collider2D[] jelliesCols;
@@ -70,6 +70,7 @@ public class JellyManager : MonoBehaviour {
                     if (c2 == jelliesCols[i])
                     {
                         c2.GetComponent<Jelly>().Slice();
+                       
                     }
                 }
             }

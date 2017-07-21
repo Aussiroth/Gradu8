@@ -10,6 +10,9 @@ public class GameManager : MonoBehaviour {
     public PlayerController thePlayer;
     private Vector3 playerStartPoint;
 
+    public DeadlineController theDeadline;
+    private Vector3 deadlineStartPoint;
+
     private PlatformDestroyer[] platformList;
 
     private ScoreManager theScoreManager;
@@ -22,6 +25,7 @@ public class GameManager : MonoBehaviour {
 	void Start () {
         platformStartPoint = platformGenerator.position;
         playerStartPoint = thePlayer.transform.position;
+        deadlineStartPoint = theDeadline.transform.position;
 
         theScoreManager = FindObjectOfType<ScoreManager>();
 	}
@@ -41,7 +45,35 @@ public class GameManager : MonoBehaviour {
             jelly.isPaused = true;
         }
 
-        FindObjectOfType<BombManager>().isPaused = true;
+        BlacklyManager[] bk = FindObjectsOfType(typeof(BlacklyManager)) as BlacklyManager[];
+        foreach (BlacklyManager jelly in bk)
+        {
+            jelly.isPaused = true;
+        }
+
+        BellyManager[] bu = FindObjectsOfType(typeof(BellyManager)) as BellyManager[];
+        foreach (BellyManager jelly in bu)
+        {
+            jelly.isPaused = true;
+        }
+
+        GellyManager[] g = FindObjectsOfType(typeof(GellyManager)) as GellyManager[];
+        foreach (GellyManager jelly in g)
+        {
+            jelly.isPaused = true;
+        }
+
+        RellyManager[] r = FindObjectsOfType(typeof(RellyManager)) as RellyManager[];
+        foreach (RellyManager jelly in r)
+        {
+            jelly.isPaused = true;
+        }
+
+        BombManager[] b = FindObjectsOfType(typeof(BombManager)) as BombManager[];
+        foreach (BombManager bomb in b)
+        {
+            bomb.isPaused = true;
+        }
 
         theScoreManager.scoreIncreasing = false;
         thePlayer.gameObject.SetActive(false);
@@ -67,7 +99,35 @@ public class GameManager : MonoBehaviour {
             jelly.isPaused = false;
         }
 
-        FindObjectOfType<BombManager>().isPaused = false;
+        BlacklyManager[] bk = FindObjectsOfType(typeof(BlacklyManager)) as BlacklyManager[];
+        foreach (BlacklyManager jelly in bk)
+        {
+            jelly.isPaused = false;
+        }
+
+        BellyManager[] bu = FindObjectsOfType(typeof(BellyManager)) as BellyManager[];
+        foreach (BellyManager jelly in bu)
+        {
+            jelly.isPaused = false;
+        }
+
+        GellyManager[] g = FindObjectsOfType(typeof(GellyManager)) as GellyManager[];
+        foreach (GellyManager jelly in g)
+        {
+            jelly.isPaused = false;
+        }
+
+        RellyManager[] r = FindObjectsOfType(typeof(RellyManager)) as RellyManager[];
+        foreach (RellyManager jelly in r)
+        {
+            jelly.isPaused = false;
+        }
+
+        BombManager[] b = FindObjectsOfType(typeof(BombManager)) as BombManager[];
+        foreach (BombManager bomb in b)
+        {
+            bomb.isPaused = false;
+        }
 
         theDeathScreen.gameObject.SetActive(false);
         platformList = FindObjectsOfType<PlatformDestroyer>();
@@ -75,9 +135,13 @@ public class GameManager : MonoBehaviour {
         {
             platformList[i].gameObject.SetActive(false);
         }
-
-        thePlayer.transform.position = playerStartPoint;
+        
         platformGenerator.position = platformStartPoint;
+        thePlayer.transform.position = playerStartPoint;
+        theDeadline.transform.position = deadlineStartPoint;
+
+        theDeadline.ResetSpeed();
+
         thePlayer.gameObject.SetActive(true);
 
         theScoreManager.scoreCount = 0;

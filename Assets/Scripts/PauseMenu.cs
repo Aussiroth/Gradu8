@@ -23,7 +23,35 @@ public class PauseMenu : MonoBehaviour {
             jelly.isPaused = true;
         }
 
-        FindObjectOfType<BombManager>().isPaused = true;
+        BlacklyManager[] bk = FindObjectsOfType(typeof(BlacklyManager)) as BlacklyManager[];
+        foreach (BlacklyManager jelly in bk)
+        {
+            jelly.isPaused = true;
+        }
+
+        BellyManager[] bu = FindObjectsOfType(typeof(BellyManager)) as BellyManager[];
+        foreach (BellyManager jelly in bu)
+        {
+            jelly.isPaused = true;
+        }
+
+        GellyManager[] g = FindObjectsOfType(typeof(GellyManager)) as GellyManager[];
+        foreach (GellyManager jelly in g)
+        {
+            jelly.isPaused = true;
+        }
+
+        RellyManager[] r = FindObjectsOfType(typeof(RellyManager)) as RellyManager[];
+        foreach (RellyManager jelly in r)
+        {
+            jelly.isPaused = true;
+        }
+
+        BombManager[] b = FindObjectsOfType(typeof(BombManager)) as BombManager[];
+        foreach (BombManager bomb in b)
+        {
+            bomb.isPaused = true;
+        }
     }
 
     public void ResumeGame()
@@ -39,7 +67,35 @@ public class PauseMenu : MonoBehaviour {
             jelly.isPaused = false;
         }
 
-        FindObjectOfType<BombManager>().isPaused = false;
+        BlacklyManager[] bk = FindObjectsOfType(typeof(BlacklyManager)) as BlacklyManager[];
+        foreach (BlacklyManager jelly in bk)
+        {
+            jelly.isPaused = false;
+        }
+
+        BellyManager[] bu = FindObjectsOfType(typeof(BellyManager)) as BellyManager[];
+        foreach (BellyManager jelly in bu)
+        {
+            jelly.isPaused = false;
+        }
+
+        GellyManager[] g = FindObjectsOfType(typeof(GellyManager)) as GellyManager[];
+        foreach (GellyManager jelly in g)
+        {
+            jelly.isPaused = false;
+        }
+
+        RellyManager[] r = FindObjectsOfType(typeof(RellyManager)) as RellyManager[];
+        foreach (RellyManager jelly in r)
+        {
+            jelly.isPaused = false;
+        }
+
+        BombManager[] b = FindObjectsOfType(typeof(BombManager)) as BombManager[];
+        foreach (BombManager bomb in b)
+        {
+            bomb.isPaused = false;
+        }
     }
 
     public void RestartGame()

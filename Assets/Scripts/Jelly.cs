@@ -14,6 +14,7 @@ public class Jelly : MonoBehaviour {
     private float speed;
     private bool isSliced = false;
     private ScoreManager jManager;
+    private SoundManager sManager;
     
     public Sprite[] sprites;
     private int spriteIndex;
@@ -24,6 +25,7 @@ public class Jelly : MonoBehaviour {
     public void Awake()
     {
         jManager = FindObjectOfType<ScoreManager>();
+        sManager = FindObjectOfType<SoundManager>();
     }
 
     public void LaunchJelly(float verticalVelocity,float xSpeed,Vector3 pos)
@@ -76,7 +78,8 @@ public class Jelly : MonoBehaviour {
         isSliced = true;
 
         //JellyManager.Instance.IncrementScore(1);
-         jManager.JellyScore(1);
+        jManager.JellyScore(1);
+        sManager.JellyHitSound(1);
     }
 
 	public void OnTriggerEnter2D(Collider2D other)
