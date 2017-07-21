@@ -32,4 +32,13 @@ public class AttackWeapon : MonoBehaviour {
 		}
 	}
 
+	public void OnTriggerEnter2D(Collider2D other)
+	{
+		//kill enemies if weapon hits them too.
+		if (other.gameObject.tag == "enemy")
+		{
+			other.gameObject.SetActive(false);
+		}
+	}
+
 }

@@ -97,7 +97,7 @@ public class PlatformGenerator : MonoBehaviour {
                 theCoinGenerator.SpawnCoins(new Vector3(transform.position.x, transform.position.y + 1f, transform.position.z));
             }
 
-            if (Random.Range(0f, 100f) < randomSpikeThreshold)
+			if (Random.Range(0f, 100f) < randomSpikeThreshold && platformWidths[platformSelector] >= 9)
             {
                 GameObject newSpike = spikePool.GetPooledObject();
 
@@ -107,6 +107,7 @@ public class PlatformGenerator : MonoBehaviour {
 
                 newSpike.transform.position = transform.position + spikePosition;
                 newSpike.transform.rotation = transform.rotation;
+				newSpike.GetComponent<Spike>().setPlatformLength(platformWidths[platformSelector]);
                 newSpike.SetActive(true);
             }
 
