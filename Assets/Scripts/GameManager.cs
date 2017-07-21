@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour {
     private PlatformDestroyer[] platformList;
 
     private ScoreManager theScoreManager;
+	private PowerupManager thePowerupManager;
 
     public DeathMenu theDeathScreen;
 
@@ -25,9 +26,9 @@ public class GameManager : MonoBehaviour {
 	void Start () {
         platformStartPoint = platformGenerator.position;
         playerStartPoint = thePlayer.transform.position;
-        deadlineStartPoint = theDeadline.transform.position;
-
+		deadlineStartPoint = theDeadline.transform.position;
         theScoreManager = FindObjectOfType<ScoreManager>();
+		thePowerupManager = FindObjectOfType<PowerupManager>();
 	}
 	
 	// Update is called once per frame
@@ -137,18 +138,22 @@ public class GameManager : MonoBehaviour {
         }
         
         platformGenerator.position = platformStartPoint;
+
         thePlayer.transform.position = playerStartPoint;
         theDeadline.transform.position = deadlineStartPoint;
 
         theDeadline.ResetSpeed();
 
         thePlayer.gameObject.SetActive(true);
+		//reset player speed
+		thePlayer.moveSpeed = thePlayer.normalMoveSpeed;
 
         theScoreManager.scoreCount = 0;
         theScoreManager.jellyScoreCount = 0;
         theScoreManager.scoreIncreasing = true;
 
         powerupReset = true;
+		thePowerupManager.resetPowerup();
     }
     
     /* //Method to restart game
