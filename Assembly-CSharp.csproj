@@ -59,6 +59,11 @@
      <Compile Include="Assets\Scripts\BlacklyManager.cs" />
      <Compile Include="Assets\Scripts\Bomb.cs" />
      <Compile Include="Assets\Scripts\BombManager.cs" />
+     <Compile Include="Assets\Scripts\BossController.cs" />
+     <Compile Include="Assets\Scripts\BossDeathMenu.cs" />
+     <Compile Include="Assets\Scripts\BossGameManager.cs" />
+     <Compile Include="Assets\Scripts\BossPauseMenu.cs" />
+     <Compile Include="Assets\Scripts\BossWeapon.cs" />
      <Compile Include="Assets\Scripts\CameraController.cs" />
      <Compile Include="Assets\Scripts\CoinGenerator.cs" />
      <Compile Include="Assets\Scripts\DeadlineController.cs" />
