@@ -14,11 +14,16 @@ public class BossController : MonoBehaviour {
 	public Transform minHeightPoint;
 
 	public float stopTime;
+	public float attackTime;
+	public float attackThreshold;
+
+	public ObjectPooler weaponPooler;
 
 	private bool higher;
 	private bool atPosition;
 	private float newHeight;
 	private float timeLeft;
+	private float timeToAttack;
 
 	// Use this for initialization
 	void Start () {
@@ -27,6 +32,7 @@ public class BossController : MonoBehaviour {
 		timeLeft = 0;
 		atPosition = false;
 		higher = false;
+		timeToAttack = attackTime;
 	}
 	
 	// Update is called once per frame
@@ -70,7 +76,18 @@ public class BossController : MonoBehaviour {
 				}
 			}
 		}
-		//
+		//perform boss attack check here
+		timeToAttack -= Time.deltaTime;
+		if (timeToAttack <= 0)
+		{
+			timeToAttack = attackTime;
+			if (Random.Range(0, 100) < attackThreshold)
+			{
+				GameObject bossWeapon = weaponPooler.GetPooledObject();
+				bossWeapon.transform.position = transform.position;
+				bossWeapon.SetActive(true);
+			}
+		}
 	}
 
 

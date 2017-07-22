@@ -63,6 +63,7 @@
      <Compile Include="Assets\Scripts\BossDeathMenu.cs" />
      <Compile Include="Assets\Scripts\BossGameManager.cs" />
      <Compile Include="Assets\Scripts\BossPauseMenu.cs" />
+     <Compile Include="Assets\Scripts\BossScoreManager.cs" />
      <Compile Include="Assets\Scripts\BossWeapon.cs" />
      <Compile Include="Assets\Scripts\CameraController.cs" />
      <Compile Include="Assets\Scripts\CoinGenerator.cs" />

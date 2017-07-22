@@ -130,7 +130,7 @@ public class PlayerController : MonoBehaviour {
     {
         if (collision.gameObject.tag == "enemy")
         {
-            FindObjectOfType<ScoreManager>().LoseLife();
+            FindObjectOfType<BossScoreManager>().LoseLife();
             collision.gameObject.SetActive(false);
         }
 
