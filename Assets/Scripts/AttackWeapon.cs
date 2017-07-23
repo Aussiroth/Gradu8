@@ -32,4 +32,15 @@ public class AttackWeapon : MonoBehaviour {
 		}
 	}
 
+	public void OnTriggerEnter2D(Collider2D other)
+	{
+		if (gameObject.tag == "antiplatform")
+		{
+			if (other.gameObject.tag == "platform")
+			{
+				other.gameObject.SetActive(false);
+		
+			}
+		}
+	}
 }

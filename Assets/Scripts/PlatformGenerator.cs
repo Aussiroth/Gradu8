@@ -102,8 +102,6 @@ public class PlatformGenerator : MonoBehaviour {
             {
                 GameObject newSpike = spikePool.GetPooledObject();
 
-                float spikeXPosition = Random.Range(-platformWidths[platformSelector] / 2f + 1f, platformWidths[platformSelector] / 2f - 1f);
-
                 Vector3 spikePosition = new Vector3(0f, 0.5f, 0f);
 
                 newSpike.transform.position = transform.position + spikePosition;

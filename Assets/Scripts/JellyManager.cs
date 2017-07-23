@@ -71,7 +71,6 @@ public class JellyManager : MonoBehaviour {
                     if (c2 == jelliesCols[i])
                     {
                         c2.GetComponent<Jelly>().Slice();
-                       
                     }
                 }
             }

@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 50e708be2e4116e40b73ff3abb71b87f
-timeCreated: 1498985125
+timeCreated: 1500785917
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -9,6 +9,7 @@ TextureImporter:
     21300004: life_empty
     21300006: life_full
     21300008: weapon
+    21300010: PlatformWeapon
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -142,6 +143,19 @@ TextureImporter:
         y: 403
         width: 88
         height: 86
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlatformWeapon
+      rect:
+        serializedVersion: 2
+        x: 278
+        y: 531
+        width: 86
+        height: 85
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
