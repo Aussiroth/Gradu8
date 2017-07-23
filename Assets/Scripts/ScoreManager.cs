@@ -23,6 +23,8 @@ public class ScoreManager : MonoBehaviour {
     public bool scoreIncreasing;
 	public bool scorePowerup;
 
+    public GameObject damageEffect;
+
     // Use this for initialization
 	void Start () {
 		if(PlayerPrefs.HasKey("HighScore"))
@@ -88,6 +90,9 @@ public class ScoreManager : MonoBehaviour {
         if ((lifepoint - 1) >= 0)
              lifepoints[lifepoint - 1].enabled = false;
 
+        damageEffect.SetActive(true);
+        StartCoroutine("Delay");
+        FindObjectOfType<SoundManager>().DamageSound();
     }
 
     public void AddLife()
@@ -110,5 +115,12 @@ public class ScoreManager : MonoBehaviour {
         {
             lifepoints[i].enabled = true;
         }
+    }
+
+    IEnumerator Delay()
+    {
+        yield return new WaitForSeconds(0.3f);
+        damageEffect.SetActive(false);
+
     }
 }

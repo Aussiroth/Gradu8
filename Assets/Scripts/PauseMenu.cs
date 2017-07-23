@@ -16,6 +16,12 @@ public class PauseMenu : MonoBehaviour {
 
         pauseMenu.SetActive(true);
 
+		try 
+		{
+        	FindObjectOfType<DeadlineController>().pause = true;
+		}
+		catch { }
+
         //Need to pause every JellyManager scripts since there are more than 1 JellyManager present
         JellyManager[] j = FindObjectsOfType(typeof(JellyManager)) as JellyManager[];
         foreach (JellyManager jelly in j)
@@ -60,6 +66,8 @@ public class PauseMenu : MonoBehaviour {
         Time.timeScale = 1f;
 
         pauseMenu.SetActive(false);
+
+        FindObjectOfType<DeadlineController>().pause = false;
 
         JellyManager[] j = FindObjectsOfType(typeof(JellyManager)) as JellyManager[];
         foreach (JellyManager jelly in j)

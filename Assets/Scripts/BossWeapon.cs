@@ -9,7 +9,6 @@ public class BossWeapon : MonoBehaviour {
 	public Rigidbody2D myRigidBody;
 
 	public PlayerController thePlayer;
-	public GameObject platformGenerationPoint;
 
 	// Use this for initialization
 	void Start () {
@@ -22,7 +21,6 @@ public class BossWeapon : MonoBehaviour {
 		//Basically the projectile moves at a constant speed towards the player, equal to baseMoveSpeed
 		currMoveSpeed = thePlayer.moveSpeed - baseMoveSpeed;
 		myRigidBody.velocity = new Vector2(currMoveSpeed, myRigidBody.velocity.y);
-
 		//boss weapons go left, so use the usual destruction script
 	}
 

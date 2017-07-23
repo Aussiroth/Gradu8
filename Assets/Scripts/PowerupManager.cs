@@ -38,8 +38,12 @@ public class PowerupManager : MonoBehaviour {
 		theGameManager = FindObjectOfType<GameManager>();
 		theWeaponManager = FindObjectOfType<WeaponManager>();
 		storedPowerUps = new int[3];
-		//initialise to default state
-		resetPowerup();
+
+		//0 is double points, 1 is safemode, 2 is weapon
+
+		for (int i = 0; i < storedPowerUps.Length; i++)
+			//for testing, set to 10
+			storedPowerUps [i] = 10;
 	}
 
 	// Update is called once per frame
@@ -126,7 +130,10 @@ public class PowerupManager : MonoBehaviour {
 	//call when double points powerup activated
 	void DoDoublePoints()
 	{
-        theWeaponManager.TimeHack();
+        //theWeaponManager.TimeHack();
+        theWeaponManager.AirWalkOn();
+        StartCoroutine("AirTime");
+
 		theScoreManager.scorePowerup = true;
 	}
 
@@ -146,12 +153,9 @@ public class PowerupManager : MonoBehaviour {
 		thePlatformGenerator.randomSpikeThreshold = 0f;
 	}
 
-	//Calling this function resets powerup counts to default state
-	public void resetPowerup()
-	{
-		//0 is double points, 1 is safemode, 2 is weapon
-		for (int i = 0; i < storedPowerUps.Length; i++)
-			//for testing, set to 10
-			storedPowerUps [i] = 10;
-	}
+    IEnumerator AirTime()
+    {
+        yield return new WaitForSeconds(5.0f);
+        theWeaponManager.AirWalkOff();
+    }
 }

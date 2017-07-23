@@ -31,10 +31,6 @@ public class PlayerController : MonoBehaviour {
 
     public GameManager theGameManager;
 
-    public AudioSource jumpSound;
-    public AudioSource deathSound;
-    public AudioSource dragonSound;
-
 	// Use this for initialization
 	void Start () {
         myRigidbody = GetComponent<Rigidbody2D>();
@@ -79,7 +75,7 @@ public class PlayerController : MonoBehaviour {
             {
                 myRigidbody.velocity = new Vector2(myRigidbody.velocity.x, jumpForce);
                 stoppedJumping = false;
-                jumpSound.Play();
+                FindObjectOfType<SoundManager>().JumpSound();
             }
             //Enable double jump
             if(!grounded && canDoubleJump)
@@ -88,7 +84,7 @@ public class PlayerController : MonoBehaviour {
                 jumpTimeCounter = jumpTime;
                 stoppedJumping = false;
                 canDoubleJump = false;
-                jumpSound.Play();
+                FindObjectOfType<SoundManager>().JumpSound();
             }
         }
 
@@ -122,7 +118,7 @@ public class PlayerController : MonoBehaviour {
         if(other.gameObject.tag == "killbox")
         {
             theGameManager.DeathScene();
-            deathSound.Play();          
+            FindObjectOfType<SoundManager>().DeathSound();
         }
     }
 
@@ -130,7 +126,7 @@ public class PlayerController : MonoBehaviour {
     {
         if (collision.gameObject.tag == "enemy")
         {
-            FindObjectOfType<BossScoreManager>().LoseLife();
+            FindObjectOfType<ScoreManager>().LoseLife();
             collision.gameObject.SetActive(false);
         }
 
@@ -147,12 +143,14 @@ public class PlayerController : MonoBehaviour {
         if (collision.gameObject.tag == "killbox")
         {
             theGameManager.DeathScene();
-            deathSound.Play();
+            FindObjectOfType<SoundManager>().DeathSound();
 
             FindObjectOfType<SoundManager>().DragonMute();
-            dragonSound.Play();
-
+            FindObjectOfType<SoundManager>().DragonKill();       
+            FindObjectOfType<DeadlineController>().killed = true;
             
+
+
         }
 
     }
@@ -160,7 +158,7 @@ public class PlayerController : MonoBehaviour {
     IEnumerator Delay()
     {
         yield return new WaitForSeconds(3.0f);
-        FindObjectOfType<DeadlineController>().ReduceSpeed(3);
+        FindObjectOfType<DeadlineController>().ReduceSpeed(2);
     }
 
     /*

@@ -11,7 +11,8 @@ public class RellyManager : MonoBehaviour {
 
     private float lastSpawn;
     private float deltaSpawn;
-    //private float deltaSpawn = Random.Range(1.0f,3.0f); //will result in melon spam
+    public float minSpawn;
+    public float maxSpawn;
 
     public Transform trail;
     public GameObject spawnPoint;
@@ -32,7 +33,7 @@ public class RellyManager : MonoBehaviour {
         if (isPaused)
             return;
 
-        deltaSpawn = Random.Range(3.0f, 5.0f);
+        deltaSpawn = Random.Range(minSpawn, maxSpawn);
         if (Time.time - lastSpawn > deltaSpawn)
         {
             Relly j = GetJelly();

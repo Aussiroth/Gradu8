@@ -6,7 +6,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{758D9B08-2BA2-2D0C-B786-10261652514D}</ProjectGuid>
+    <ProjectGuid>{7F4A0746-616E-1CDE-E4B5-4FF375316466}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -60,10 +60,6 @@
      <Compile Include="Assets\Scripts\Bomb.cs" />
      <Compile Include="Assets\Scripts\BombManager.cs" />
      <Compile Include="Assets\Scripts\BossController.cs" />
-     <Compile Include="Assets\Scripts\BossDeathMenu.cs" />
-     <Compile Include="Assets\Scripts\BossGameManager.cs" />
-     <Compile Include="Assets\Scripts\BossPauseMenu.cs" />
-     <Compile Include="Assets\Scripts\BossScoreManager.cs" />
      <Compile Include="Assets\Scripts\BossWeapon.cs" />
      <Compile Include="Assets\Scripts\CameraController.cs" />
      <Compile Include="Assets\Scripts\CoinGenerator.cs" />
@@ -75,6 +71,7 @@
      <Compile Include="Assets\Scripts\GellyManager.cs" />
      <Compile Include="Assets\Scripts\Jelly.cs" />
      <Compile Include="Assets\Scripts\JellyManager.cs" />
+     <Compile Include="Assets\Scripts\LevelSelector.cs" />
      <Compile Include="Assets\Scripts\MainMenu.cs" />
      <Compile Include="Assets\Scripts\ObjectPooler.cs" />
      <Compile Include="Assets\Scripts\PauseMenu.cs" />
@@ -96,7 +93,7 @@
      <None Include="Assets\Standard Assets\Fonts\OpenSans\License!.txt" />
      <None Include="Assets\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
  <Reference Include="Facebook.Unity.Settings">
- <HintPath>C:/Users/Alvin Yan/Documents/GitHub/Gradu8/Library/FacebookSDK/Facebook.Unity.Settings.dll</HintPath>
+ <HintPath>C:/Users/Alvin Yan/Documents/GitHub/Gradu8 ver 8/Library/FacebookSDK/Facebook.Unity.Settings.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.UI">
  <HintPath>D:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
@@ -122,7 +119,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
-      <Project>{8327CA75-D7D6-9F37-A4EB-8811D6040957}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
+      <Project>{4C43F77B-1DE8-1764-B2F5-2D0361E14E79}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

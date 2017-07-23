@@ -4,20 +4,54 @@ using UnityEngine;
 
 public class SoundManager : MonoBehaviour {
 
+    public AudioSource coinSound;
+    public AudioSource deathSound;
+    public AudioSource jumpSound;
+
     public AudioSource jellyBurst;
     public AudioSource blacklyBurst;
     public AudioSource bellyBurst;
     public AudioSource gellyBurst;
     public AudioSource rellyBurst;
     public AudioSource bombBurst;
+
     public AudioSource birdSound;
+    public AudioSource birdAfterEffect;
 
     public AudioSource dragonRoar;
+    public AudioSource dragonKill;
 
     public AudioSource fullAttackBurst;
+
+    public AudioSource damageSound;
+    public AudioSource timeHack;
 	
 	void Start () {
       
+    }
+
+    public void CoinBling()
+    {
+        //this if condition is to prevent skipping of coin sounds when multiple coins are picked really fast
+        if (coinSound.isPlaying)
+        {
+            coinSound.Stop();
+            coinSound.Play();
+        }
+        else
+        {
+            coinSound.Play();
+        }
+    }
+
+    public void DeathSound()
+    {
+        deathSound.Play();
+    }
+
+    public void JumpSound()
+    {
+        jumpSound.Play();
     }
 	
 	public void JellyHitSound(int number)
@@ -34,14 +68,17 @@ public class SoundManager : MonoBehaviour {
                 jellyBurst.Play();
             }
 
-            if (birdSound.isPlaying)
+            if (birdSound.isPlaying || birdAfterEffect.isPlaying)
             {
                 birdSound.Stop();
+                //birdAfterEffect.Stop();
                 birdSound.Play();
+                birdAfterEffect.Play();
             }
             else
             {
                 birdSound.Play();
+                birdAfterEffect.Play();
             }
         }
 
@@ -57,14 +94,17 @@ public class SoundManager : MonoBehaviour {
                 blacklyBurst.Play();
             }
 
-            if (birdSound.isPlaying)
+            if (birdSound.isPlaying || birdAfterEffect.isPlaying)
             {
                 birdSound.Stop();
+                //birdAfterEffect.Stop();
                 birdSound.Play();
+                birdAfterEffect.Play();
             }
             else
             {
                 birdSound.Play();
+                birdAfterEffect.Play();
             }
         }
 
@@ -80,14 +120,17 @@ public class SoundManager : MonoBehaviour {
                 bellyBurst.Play();
             }
 
-            if (birdSound.isPlaying)
+            if (birdSound.isPlaying || birdAfterEffect.isPlaying)
             {
                 birdSound.Stop();
+                //birdAfterEffect.Stop();
                 birdSound.Play();
+                birdAfterEffect.Play();
             }
             else
             {
                 birdSound.Play();
+                birdAfterEffect.Play();
             }
         }
 
@@ -103,14 +146,17 @@ public class SoundManager : MonoBehaviour {
                 gellyBurst.Play();
             }
 
-            if (birdSound.isPlaying)
+            if (birdSound.isPlaying || birdAfterEffect.isPlaying)
             {
                 birdSound.Stop();
+                //birdAfterEffect.Stop();
                 birdSound.Play();
+                birdAfterEffect.Play();
             }
             else
             {
                 birdSound.Play();
+                birdAfterEffect.Play();
             }
         }
 
@@ -126,14 +172,17 @@ public class SoundManager : MonoBehaviour {
                 rellyBurst.Play();
             }
 
-            if (birdSound.isPlaying)
+            if (birdSound.isPlaying || birdAfterEffect.isPlaying)
             {
                 birdSound.Stop();
+                //birdAfterEffect.Stop();
                 birdSound.Play();
+                birdAfterEffect.Play();
             }
             else
             {
                 birdSound.Play();
+                birdAfterEffect.Play();
             }
         }
     }
@@ -150,20 +199,30 @@ public class SoundManager : MonoBehaviour {
             bombBurst.Play();
         }
 
-        if (birdSound.isPlaying)
+        if (birdSound.isPlaying || birdAfterEffect.isPlaying)
         {
             birdSound.Stop();
+            //birdAfterEffect.Stop();
             birdSound.Play();
+            birdAfterEffect.Play();
         }
         else
         {
             birdSound.Play();
+            birdAfterEffect.Play();
         }
     }
 
     public void DragonRoar()
     {
-        dragonRoar.Play();
+        if (dragonRoar.isPlaying)
+        {
+
+        }
+        else
+        {
+            dragonRoar.Play();
+        }
     }
 
     public void DragonMute()
@@ -171,9 +230,29 @@ public class SoundManager : MonoBehaviour {
         dragonRoar.Stop();
     }
 
+    public void DragonKill()
+    {
+        dragonKill.Play();
+    }
+
     public void FullAttackSound()
     {
         fullAttackBurst.Play();
+    }
+
+    public void DamageSound()
+    {
+        damageSound.Play();
+    }
+
+    public void TimeHackStart()
+    {
+        timeHack.Play();
+    }
+
+    public void TimeHackStop()
+    {
+        timeHack.Stop();
     }
 
 }

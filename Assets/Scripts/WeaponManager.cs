@@ -9,6 +9,7 @@ public class WeaponManager : MonoBehaviour {
 
     public GameObject fullScreen;
     public GameObject timeHack;
+    public GameObject fullHealthEffect;
 
     // Use this for initialization
     void Start () {
@@ -33,6 +34,7 @@ public class WeaponManager : MonoBehaviour {
     public void FullAttack()
     {
         fullScreen.SetActive(true);
+        fullHealthEffect.SetActive(true);
         StartCoroutine("Delay");
 
     }
@@ -41,11 +43,13 @@ public class WeaponManager : MonoBehaviour {
     {
         yield return new WaitForSeconds(1.0f);
         fullScreen.SetActive(false);
+        fullHealthEffect.SetActive(false);
     }
 
     public void TimeHack()
     {
         timeHack.SetActive(true);
+        FindObjectOfType<SoundManager>().TimeHackStart();
         Time.timeScale = 0f;
 
         StartCoroutine("TimeStop");
@@ -57,5 +61,16 @@ public class WeaponManager : MonoBehaviour {
 
         Time.timeScale = 1f;
         timeHack.SetActive(false);
+        FindObjectOfType<SoundManager>().TimeHackStop();
+    }
+
+    public void AirWalkOn()
+    {
+        FindObjectOfType<PlayerController>().groundCheckRadius = 10.0f;
+    }
+
+    public void AirWalkOff()
+    {
+        FindObjectOfType<PlayerController>().groundCheckRadius = 0.1f;
     }
 }

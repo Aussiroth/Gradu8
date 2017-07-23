@@ -11,7 +11,8 @@ public class JellyManager : MonoBehaviour {
 
     private float lastSpawn;
     private float deltaSpawn;
-    //private float deltaSpawn = Random.Range(1.0f,3.0f); //will result in melon spam
+    public float minSpawn;
+    public float maxSpawn;
 
     //public static JellyManager Instance { set; get;} //create an instance of the JellyManager since JellyManager is not static
 
@@ -45,7 +46,7 @@ public class JellyManager : MonoBehaviour {
         if (isPaused)
             return;
 
-        deltaSpawn = Random.Range(0f, 5.0f);
+        deltaSpawn = Random.Range(minSpawn, maxSpawn);
         if (Time.time - lastSpawn > deltaSpawn)
         {
             Jelly j = GetJelly();
@@ -70,6 +71,7 @@ public class JellyManager : MonoBehaviour {
                     if (c2 == jelliesCols[i])
                     {
                         c2.GetComponent<Jelly>().Slice();
+                       
                     }
                 }
             }

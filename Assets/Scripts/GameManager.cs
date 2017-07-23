@@ -4,19 +4,18 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour {
 
-    public Transform platformGenerator;
-    private Vector3 platformStartPoint;
+    public Transform[] platformGenerators;
+    private Vector3[] platformStartPoints;
 
     public PlayerController thePlayer;
     private Vector3 playerStartPoint;
 
-    public DeadlineController theDeadline;
+    public GameObject theDeadline;
     private Vector3 deadlineStartPoint;
 
     private PlatformDestroyer[] platformList;
 
     private ScoreManager theScoreManager;
-	private PowerupManager thePowerupManager;
 
     public DeathMenu theDeathScreen;
 
@@ -24,11 +23,15 @@ public class GameManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        platformStartPoint = platformGenerator.position;
+		platformStartPoints = new Vector3[platformGenerators.Length];
+		for (int i = 0; i < platformGenerators.Length; i++)
+		{
+			platformStartPoints[i] = platformGenerators[i].position;
+		}
         playerStartPoint = thePlayer.transform.position;
-		deadlineStartPoint = theDeadline.transform.position;
+        deadlineStartPoint = theDeadline.transform.position;
+
         theScoreManager = FindObjectOfType<ScoreManager>();
-		thePowerupManager = FindObjectOfType<PowerupManager>();
 	}
 	
 	// Update is called once per frame
@@ -136,24 +139,27 @@ public class GameManager : MonoBehaviour {
         {
             platformList[i].gameObject.SetActive(false);
         }
-        
-        platformGenerator.position = platformStartPoint;
-
+		for (int i = 0; i < platformGenerators.Length; i++)
+		{
+			platformGenerators[i].position = platformStartPoints[i];
+		}
         thePlayer.transform.position = playerStartPoint;
         theDeadline.transform.position = deadlineStartPoint;
 
-        theDeadline.ResetSpeed();
+		if (theDeadline.tag == "deadline")
+		{
+			theDeadline.GetComponent<DeadlineController>().ResetSpeed();
+			FindObjectOfType<DeadlineController>().killed = false;
+			FindObjectOfType<DeadlineController>().pause = false;
+		}
 
         thePlayer.gameObject.SetActive(true);
-		//reset player speed
-		thePlayer.moveSpeed = thePlayer.normalMoveSpeed;
 
         theScoreManager.scoreCount = 0;
         theScoreManager.jellyScoreCount = 0;
         theScoreManager.scoreIncreasing = true;
 
         powerupReset = true;
-		thePowerupManager.resetPowerup();
     }
     
     /* //Method to restart game

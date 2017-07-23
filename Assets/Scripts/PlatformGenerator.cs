@@ -17,8 +17,9 @@ public class PlatformGenerator : MonoBehaviour {
 
     public ObjectPooler[] theObjectPools;
 
+    public GameObject minHeightPoint;
+    public GameObject maxHeightPoint;
     private float minHeight;
-    public Transform maxHeightPoint;
     private float maxHeight;
     public float maxHeightChange;
     private float heightChange;
@@ -45,8 +46,8 @@ public class PlatformGenerator : MonoBehaviour {
             platformWidths[i] = theObjectPools[i].pooledObject.GetComponent<BoxCollider2D>().size.x;
         }
 
-        minHeight = transform.position.y;
-        maxHeight = maxHeightPoint.position.y;
+        minHeight = minHeightPoint.transform.position.y;
+        maxHeight = maxHeightPoint.transform.position.y;
 
         theCoinGenerator = FindObjectOfType<CoinGenerator>();
     }
@@ -97,7 +98,7 @@ public class PlatformGenerator : MonoBehaviour {
                 theCoinGenerator.SpawnCoins(new Vector3(transform.position.x, transform.position.y + 1f, transform.position.z));
             }
 
-			if (Random.Range(0f, 100f) < randomSpikeThreshold && platformWidths[platformSelector] >= 9)
+            if (Random.Range(0f, 100f) < randomSpikeThreshold)
             {
                 GameObject newSpike = spikePool.GetPooledObject();
 
@@ -107,7 +108,6 @@ public class PlatformGenerator : MonoBehaviour {
 
                 newSpike.transform.position = transform.position + spikePosition;
                 newSpike.transform.rotation = transform.rotation;
-				newSpike.GetComponent<Spike>().setPlatformLength(platformWidths[platformSelector]);
                 newSpike.SetActive(true);
             }
 

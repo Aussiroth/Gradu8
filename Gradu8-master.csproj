@@ -110,13 +110,13 @@
     <Compile Include="Assets\Scripts\GellyManager.cs" />
     <Compile Include="Assets\Scripts\Jelly.cs" />
     <Compile Include="Assets\Scripts\JellyManager.cs" />
+    <Compile Include="Assets\Scripts\LevelSelector.cs" />
     <Compile Include="Assets\Scripts\MainMenu.cs" />
     <Compile Include="Assets\Scripts\ObjectPooler.cs" />
     <Compile Include="Assets\Scripts\PauseMenu.cs" />
     <Compile Include="Assets\Scripts\PickUpPoint.cs" />
     <Compile Include="Assets\Scripts\PlatformDestroyer.cs" />
     <Compile Include="Assets\Scripts\PlatformGenerator.cs" />
-    <Compile Include="Assets\Scripts\PlatformGenerator1.cs" />
     <Compile Include="Assets\Scripts\PlatformGenerator2.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
     <Compile Include="Assets\Scripts\PowerUps.cs" />

@@ -1,15 +1,16 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\PickUpPoint.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\AttackWeapon.cs">
     <Files>
-      <File FileName="Assets\Scripts\ScoreManager.cs" Line="101" Column="3" />
-      <File FileName="Assets\Scripts\PowerupManager.cs" Line="93" Column="50" />
-      <File FileName="Assets\Scripts\PlatformGenerator.cs" Line="62" Column="14" />
-      <File FileName="Assets\Scripts\PlayerController.cs" Line="142" Column="37" />
-      <File FileName="Assets\Scripts\BossController.cs" Line="83" Column="30" />
-      <File FileName="Assets\Scripts\AttackWeapon.cs" Line="23" Column="43" />
-      <File FileName="Assets\Scripts\BossScoreManager.cs" Line="91" Column="3" />
-      <File FileName="Assets\Scripts\PickUpPoint.cs" Line="29" Column="51" />
+      <File FileName="Assets\Scripts\ScoreManager.cs" Line="45" Column="3" />
+      <File FileName="Assets\Scripts\PlayerController.cs" Line="120" Column="26" />
+      <File FileName="Assets\Scripts\WeaponManager.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\PlatformGenerator.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\JellyManager.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\PlatformGenerator2.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\AttackWeapon.cs" Line="34" Column="1" />
+      <File FileName="Assets\Scripts\Jelly.cs" Line="88" Column="4" />
+      <File FileName="Assets\Scripts\PowerupManager.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

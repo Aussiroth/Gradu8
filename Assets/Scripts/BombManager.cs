@@ -10,8 +10,9 @@ public class BombManager : MonoBehaviour {
     public GameObject BombPrefab;
 
     private float lastSpawn;
-    private float deltaSpawn;// = 1.0f;
-    //private float deltaSpawn = Random.Range(1.0f,3.0f); //will result in melon spam
+    private float deltaSpawn;
+    public float minSpawn;
+    public float maxSpawn;
  
     public Transform trail;
     public GameObject spawnPoint;
@@ -32,7 +33,7 @@ public class BombManager : MonoBehaviour {
         if (isPaused)
             return;
 
-        deltaSpawn = Random.Range(3.0f,15.0f);
+        deltaSpawn = Random.Range(minSpawn,maxSpawn);
         if (Time.time - lastSpawn > deltaSpawn)
         {
             Bomb b = GetBomb();

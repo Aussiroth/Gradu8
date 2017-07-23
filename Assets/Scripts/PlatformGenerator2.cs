@@ -17,10 +17,12 @@ public class PlatformGenerator2 : MonoBehaviour {
 
     public ObjectPooler[] theObjectPools;
 
+    public GameObject height;
+    public GameObject maxHeightPoint;
+    public GameObject minHeightPoint; 
+    public float heightThreshold;
     private float minHeight;
-    public Transform maxHeightPoint;
     private float maxHeight;
-    public float maxHeightChange;
     private float heightChange;
 
     private CoinGenerator theCoinGenerator;
@@ -45,12 +47,10 @@ public class PlatformGenerator2 : MonoBehaviour {
             platformWidths[i] = theObjectPools[i].pooledObject.GetComponent<BoxCollider2D>().size.x;
         }
 
-        minHeight = transform.position.y;
-        maxHeight = maxHeightPoint.position.y;
+        minHeight = minHeightPoint.transform.position.y;
+        maxHeight = maxHeightPoint.transform.position.y;
 
         theCoinGenerator = FindObjectOfType<CoinGenerator>();
-
-		transform.position = new Vector3(transform.position.x + 9f, transform.position.y, transform.position.z);
     }
 
     // Update is called once per frame
@@ -63,8 +63,8 @@ public class PlatformGenerator2 : MonoBehaviour {
 
             platformSelector = Random.Range(0, theObjectPools.Length);
 
-            heightChange = transform.position.y + Random.Range(maxHeightChange, -maxHeightChange);
-            
+            heightChange = height.transform.position.y + Random.Range(-heightThreshold,heightThreshold);
+
             //Ensure the platform generates within camera
             if (heightChange > maxHeight)
             {
