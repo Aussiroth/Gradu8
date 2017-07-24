@@ -146,7 +146,7 @@ public class GameManager : MonoBehaviour {
         thePlayer.transform.position = playerStartPoint;
         theDeadline.transform.position = deadlineStartPoint;
 
-		if (theDeadline.tag == "deadline")
+		if (theDeadline.GetComponent<DeadlineController>() != null)
 		{
 			theDeadline.GetComponent<DeadlineController>().ResetSpeed();
 			FindObjectOfType<DeadlineController>().killed = false;

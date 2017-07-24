@@ -25,6 +25,8 @@ public class BossController : MonoBehaviour {
 	private float timeLeft;
 	private float timeToAttack;
 
+	public LevelSelector levelSelector;
+
 	// Use this for initialization
 	void Start () {
 		thePlayer = FindObjectOfType<PlayerController>();
@@ -33,10 +35,16 @@ public class BossController : MonoBehaviour {
 		atPosition = false;
 		higher = false;
 		timeToAttack = attackTime;
+		levelSelector = FindObjectOfType<LevelSelector>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		//if the dragon is killed, go to bonus level
+		if (health <= 0)
+		{
+			levelSelector.PlayLevelBonus();
+		}
 		//if timer is out, then get dragon to go to new position
 		if (timeLeft <= 0)
 		{

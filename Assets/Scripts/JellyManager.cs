@@ -68,7 +68,7 @@ public class JellyManager : MonoBehaviour {
             {
                 for (int i = 0; i < jelliesCols.Length; i++)
                 {
-                    if (c2 == jelliesCols[i])
+					if (c2 == jelliesCols[i] && c2.GetComponent<Jelly>() != null)
                     {
                         c2.GetComponent<Jelly>().Slice();
                     }

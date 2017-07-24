@@ -39,8 +39,11 @@ public class AttackWeapon : MonoBehaviour {
 			if (other.gameObject.tag == "platform")
 			{
 				other.gameObject.SetActive(false);
-		
 			}
+		}
+		if (other.gameObject.tag == "enemy")
+		{
+			other.gameObject.SetActive(false);
 		}
 	}
 }

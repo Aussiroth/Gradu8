@@ -57,7 +57,7 @@ public class BellyManager : MonoBehaviour {
             {
                 for (int i = 0; i < jelliesCols.Length; i++)
                 {
-                    if (c2 == jelliesCols[i])
+					if (c2 == jelliesCols[i] && c2.GetComponent<Belly>() != null)
                     {
                         c2.GetComponent<Belly>().Slice();
                        
