@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BossController : MonoBehaviour {
 
@@ -18,14 +19,13 @@ public class BossController : MonoBehaviour {
 	public float attackThreshold;
 
 	public ObjectPooler weaponPooler;
+	public GameObject hpBar;
 
 	private bool higher;
 	private bool atPosition;
 	private float newHeight;
 	private float timeLeft;
 	private float timeToAttack;
-
-	public LevelSelector levelSelector;
 
 	// Use this for initialization
 	void Start () {
@@ -35,16 +35,10 @@ public class BossController : MonoBehaviour {
 		atPosition = false;
 		higher = false;
 		timeToAttack = attackTime;
-		levelSelector = FindObjectOfType<LevelSelector>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		//if the dragon is killed, go to bonus level
-		if (health <= 0)
-		{
-			levelSelector.PlayLevelBonus();
-		}
 		//if timer is out, then get dragon to go to new position
 		if (timeLeft <= 0)
 		{
@@ -96,6 +90,13 @@ public class BossController : MonoBehaviour {
 				bossWeapon.SetActive(true);
 			}
 		}
+		//Check for boss ded
+		if (health <= 0)
+		{
+			FindObjectOfType<LevelSelector>().PlayLevelBonus();
+		}
+		//update health bar size
+		hpBar.GetComponent<RectTransform>().sizeDelta = new Vector2(30*health, 30);
 	}
 
 

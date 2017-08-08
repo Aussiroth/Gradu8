@@ -80,10 +80,9 @@ public class Gelly : MonoBehaviour {
         //JellyManager.Instance.IncrementScore(1);
         jManager.JellyScore(5);
         jManager.FullLife();
-        FindObjectOfType<WeaponManager>().FullAttack();
+        FindObjectOfType<PowerupManager>().IncreasePowerup(3);
 
         sManager.JellyHitSound(4);
-        sManager.FullAttackSound();
     }
 
 	public void OnTriggerEnter2D(Collider2D other)

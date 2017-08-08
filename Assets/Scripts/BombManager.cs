@@ -55,7 +55,7 @@ public class BombManager : MonoBehaviour {
                 {
                     for (int i = 0; i < BombCols.Length; i++)
                     {
-                        if (c2 == BombCols[i])
+						if (c2 == BombCols[i] && c2.GetComponent<Bomb>() != null)
                         {
                             c2.GetComponent<Bomb>().Slice();
                         }

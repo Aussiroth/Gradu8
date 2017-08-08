@@ -9,6 +9,9 @@ public class PauseMenu : MonoBehaviour {
 
     public GameObject pauseMenu;
 
+  //  public GameObject muteOn;
+ //   public GameObject muteOff;
+
     public void PauseGame()
     {
         //stop the scoring system when paused
@@ -119,4 +122,5 @@ public class PauseMenu : MonoBehaviour {
         SceneManager.LoadScene(mainMenuLevel);
         //Application.LoadLevel(mainMenuLevel);
     }
+
 }

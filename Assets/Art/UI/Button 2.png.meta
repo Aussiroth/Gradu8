@@ -1,10 +1,15 @@
 fileFormatVersion: 2
 guid: c3a4b6a8bdd732c4e9084a747abf409f
-timeCreated: 1497954577
+timeCreated: 1500912484
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
     21300000: JumpButton
+    21300002: Sound Off
+    21300004: Sound On
+    21300006: Music On
+    21300008: Button
+    21300010: Speed
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -86,6 +91,71 @@ TextureImporter:
         y: 3008
         width: 248
         height: 238
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Sound Off
+      rect:
+        serializedVersion: 2
+        x: 621
+        y: 670
+        width: 234
+        height: 239
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Sound On
+      rect:
+        serializedVersion: 2
+        x: 356
+        y: 666
+        width: 234
+        height: 252
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Music On
+      rect:
+        serializedVersion: 2
+        x: 359
+        y: 932
+        width: 230
+        height: 222
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Button
+      rect:
+        serializedVersion: 2
+        x: 740
+        y: 5930
+        width: 409
+        height: 182
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Speed
+      rect:
+        serializedVersion: 2
+        x: 718
+        y: 5659
+        width: 222
+        height: 233
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

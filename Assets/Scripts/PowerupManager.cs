@@ -16,7 +16,7 @@ public class PowerupManager : MonoBehaviour {
 	public float powerupTime;
 
 	private ScoreManager theScoreManager;
-	private PlatformGenerator thePlatformGenerator;
+  //private PlatformGenerator thePlatformGenerator;
 	private GameManager theGameManager;
 
 	private float normalPointsPerSecond;
@@ -28,18 +28,19 @@ public class PowerupManager : MonoBehaviour {
 	public Text safemodeText;
 	public Text doublePointText;
 	public Text weaponText;
+    public Text ultimateText;
 
 	private WeaponManager theWeaponManager;
 
 	// Use this for initialization
 	void Start () {
 		theScoreManager = FindObjectOfType<ScoreManager>();
-		thePlatformGenerator = FindObjectOfType<PlatformGenerator>();
+	//	thePlatformGenerator = FindObjectOfType<PlatformGenerator>();
 		theGameManager = FindObjectOfType<GameManager>();
 		theWeaponManager = FindObjectOfType<WeaponManager>();
-		storedPowerUps = new int[3];
+		storedPowerUps = new int[4];
 
-		//0 is double points, 1 is safemode, 2 is weapon
+		//0 is double points, 1 is safemode, 2 is weapon, 3 is ultimate
 
 		for (int i = 0; i < storedPowerUps.Length; i++)
 			//for testing, set to 10
@@ -65,8 +66,9 @@ public class PowerupManager : MonoBehaviour {
 			{
 				if (activePowerupNum == 0)
 					theScoreManager.scorePowerup = false;
-				else
-					thePlatformGenerator.randomSpikeThreshold = spikeRate;
+			/*else
+			    	thePlatformGenerator.randomSpikeThreshold = spikeRate;
+            */
 				powerupActive = false;
 			}
 
@@ -91,10 +93,15 @@ public class PowerupManager : MonoBehaviour {
 				theWeaponManager.fireWeapon();
 			}
 		}
-		//Update the shown number of powerups.
-		doublePointText.text = storedPowerUps [0].ToString();
+        else if (CrossPlatformInputManager.GetButtonDown("Ultimate"))
+        {
+            ActivatePowerup(3);
+        }
+        //Update the shown number of powerups.
+        doublePointText.text = storedPowerUps [0].ToString();
 		safemodeText.text = storedPowerUps [1].ToString();
 		weaponText.text = storedPowerUps[2].ToString();
+        ultimateText.text = storedPowerUps[3].ToString();
 	}
 
 	//Precond: powerupSelector needs to be within 1 to max number of powerups
@@ -123,6 +130,9 @@ public class PowerupManager : MonoBehaviour {
 			case(1):
 				DoSafeMode ();
 				break;
+            case (3):
+                DoUltimate();
+                break;    
 			}
 		}
 	}
@@ -130,16 +140,17 @@ public class PowerupManager : MonoBehaviour {
 	//call when double points powerup activated
 	void DoDoublePoints()
 	{
-        //theWeaponManager.TimeHack();
         theWeaponManager.AirWalkOn();
         StartCoroutine("AirTime");
 
 		theScoreManager.scorePowerup = true;
 	}
 
-	//call when safe mode powerup activated
+	//call when safe mode powerup activated. Changed to TimeHack but too lazy to change all names
 	void DoSafeMode()
 	{
+        theWeaponManager.TimeHack();
+        /*
 		//clear current spikes
 		spikeList = FindObjectsOfType<PlatformDestroyer>();
 		for (int i = 0; i < spikeList.Length; i++)
@@ -151,11 +162,19 @@ public class PowerupManager : MonoBehaviour {
 		}
 		spikeRate = thePlatformGenerator.randomSpikeThreshold;
 		thePlatformGenerator.randomSpikeThreshold = 0f;
-	}
+        */
+    }
 
     IEnumerator AirTime()
     {
         yield return new WaitForSeconds(5.0f);
         theWeaponManager.AirWalkOff();
     }
+
+    void DoUltimate()
+    {
+        FindObjectOfType<WeaponManager>().FullAttack();
+        FindObjectOfType<SoundManager>().FullAttackSound();
+    }
+
 }

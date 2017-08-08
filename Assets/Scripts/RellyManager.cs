@@ -54,10 +54,11 @@ public class RellyManager : MonoBehaviour {
             foreach (Collider2D c2 in thisFrameJelly)
             {
                 for (int i = 0; i < jelliesCols.Length; i++)
-				{
+                {
 					if (c2 == jelliesCols[i] && c2.GetComponent<Relly>() != null)
                     {
                         c2.GetComponent<Relly>().Slice();
+                       
                     }
                 }
             }

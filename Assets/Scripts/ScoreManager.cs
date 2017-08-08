@@ -37,7 +37,7 @@ public class ScoreManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        if (scoreIncreasing)
+       if (scoreIncreasing)
         {
 			if (scorePowerup)
 				scoreCount += pointsPerSecond * Time.deltaTime * powerupMultiplier;

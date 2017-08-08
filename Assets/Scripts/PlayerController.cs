@@ -24,11 +24,10 @@ public class PlayerController : MonoBehaviour {
     public LayerMask whatIsGround;
     public Transform groundCheck;
     public float groundCheckRadius;
-
     
     //private Collider2D myCollider;
     private Animator myAnimator;
-
+    
     public GameManager theGameManager;
 
 	// Use this for initialization

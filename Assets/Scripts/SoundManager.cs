@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SoundManager : MonoBehaviour {
 
+    public bool mute;
     public AudioSource coinSound;
     public AudioSource deathSound;
     public AudioSource jumpSound;
@@ -25,38 +26,301 @@ public class SoundManager : MonoBehaviour {
 
     public AudioSource damageSound;
     public AudioSource timeHack;
+
+    public AudioSource airWalkSound;
+
+    public AudioSource platformCrushSound;
 	
 	void Start () {
       
     }
 
+    public void Mute()
+    {
+        mute = !mute;
+    }
+
     public void CoinBling()
     {
-        //this if condition is to prevent skipping of coin sounds when multiple coins are picked really fast
-        if (coinSound.isPlaying)
+        if (!mute)
         {
-            coinSound.Stop();
-            coinSound.Play();
-        }
-        else
-        {
-            coinSound.Play();
+            //this if condition is to prevent skipping of coin sounds when multiple coins are picked really fast
+            if (coinSound.isPlaying)
+            {
+                coinSound.Stop();
+                coinSound.Play();
+            }
+            else
+            {
+                coinSound.Play();
+            }
         }
     }
 
     public void DeathSound()
     {
-        deathSound.Play();
+        if (!mute)
+        {
+            deathSound.Play();
+        }
     }
 
     public void JumpSound()
     {
-        jumpSound.Play();
+        if (!mute)
+        {
+            jumpSound.Play();
+        }
     }
 	
 	public void JellyHitSound(int number)
     {
-        if (number == 1)
+        if (!mute)
+        {
+
+            if (number == 1)
+            {
+                if (jellyBurst.isPlaying)
+                {
+                    jellyBurst.Stop();
+                    jellyBurst.Play();
+                }
+                else
+                {
+                    jellyBurst.Play();
+                }
+
+                if (birdSound.isPlaying || birdAfterEffect.isPlaying)
+                {
+                    birdSound.Stop();
+                    //birdAfterEffect.Stop();
+                    birdSound.Play();
+                    birdAfterEffect.Play();
+                }
+                else
+                {
+                    birdSound.Play();
+                    birdAfterEffect.Play();
+                }
+            }
+
+            if (number == 2)
+            {
+                if (blacklyBurst.isPlaying)
+                {
+                    blacklyBurst.Stop();
+                    blacklyBurst.Play();
+                }
+                else
+                {
+                    blacklyBurst.Play();
+                }
+
+                if (birdSound.isPlaying || birdAfterEffect.isPlaying)
+                {
+                    birdSound.Stop();
+                    //birdAfterEffect.Stop();
+                    birdSound.Play();
+                    birdAfterEffect.Play();
+                }
+                else
+                {
+                    birdSound.Play();
+                    birdAfterEffect.Play();
+                }
+            }
+
+            if (number == 3)
+            {
+                if (bellyBurst.isPlaying)
+                {
+                    bellyBurst.Stop();
+                    bellyBurst.Play();
+                }
+                else
+                {
+                    bellyBurst.Play();
+                }
+
+                if (birdSound.isPlaying || birdAfterEffect.isPlaying)
+                {
+                    birdSound.Stop();
+                    //birdAfterEffect.Stop();
+                    birdSound.Play();
+                    birdAfterEffect.Play();
+                }
+                else
+                {
+                    birdSound.Play();
+                    birdAfterEffect.Play();
+                }
+            }
+
+            if (number == 4)
+            {
+                if (gellyBurst.isPlaying)
+                {
+                    gellyBurst.Stop();
+                    gellyBurst.Play();
+                }
+                else
+                {
+                    gellyBurst.Play();
+                }
+
+                if (birdSound.isPlaying || birdAfterEffect.isPlaying)
+                {
+                    birdSound.Stop();
+                    //birdAfterEffect.Stop();
+                    birdSound.Play();
+                    birdAfterEffect.Play();
+                }
+                else
+                {
+                    birdSound.Play();
+                    birdAfterEffect.Play();
+                }
+            }
+
+            if (number == 5)
+            {
+                if (rellyBurst.isPlaying)
+                {
+                    rellyBurst.Stop();
+                    rellyBurst.Play();
+                }
+                else
+                {
+                    rellyBurst.Play();
+                }
+
+                if (birdSound.isPlaying || birdAfterEffect.isPlaying)
+                {
+                    birdSound.Stop();
+                    //birdAfterEffect.Stop();
+                    birdSound.Play();
+                    birdAfterEffect.Play();
+                }
+                else
+                {
+                    birdSound.Play();
+                    birdAfterEffect.Play();
+                }
+            }
+        }
+    }
+
+    public void BombHitSound()
+    {
+        if (!mute)
+        {
+            if (bombBurst.isPlaying)
+            {
+                bombBurst.Stop();
+                bombBurst.Play();
+            }
+            else
+            {
+                bombBurst.Play();
+            }
+
+            if (birdSound.isPlaying || birdAfterEffect.isPlaying)
+            {
+                birdSound.Stop();
+                //birdAfterEffect.Stop();
+                birdSound.Play();
+                birdAfterEffect.Play();
+            }
+            else
+            {
+                birdSound.Play();
+                birdAfterEffect.Play();
+            }
+        }
+    }
+
+    public void DragonRoar()
+    {
+        if (!mute)
+        {
+            if (dragonRoar.isPlaying)
+            {
+
+            }
+            else
+            {
+                dragonRoar.Play();
+            }
+        }
+    }
+
+    public void DragonMute()
+    {
+        if (!mute)
+        {
+            dragonRoar.Stop();
+        }
+    }
+
+    public void DragonKill()
+    {
+        if (!mute)
+        {
+            dragonKill.Play();
+        }
+    }
+
+    public void FullAttackSound()
+    {
+        if (!mute)
+        {
+            fullAttackBurst.Play();
+        }
+    }
+
+    public void DamageSound()
+    {
+        if (!mute)
+        {
+            damageSound.Play();
+        }
+    }
+
+    public void TimeHackStart()
+    {
+        if (!mute)
+        {
+            timeHack.Play();
+        }
+    }
+
+    public void TimeHackStop()
+    {
+        if (!mute)
+        {
+            timeHack.Stop();
+        }
+    }
+
+    public void AirWalkStart()
+    {
+        if (!mute)
+        {
+            airWalkSound.Play();
+        }
+    }
+
+    public void AirWalkStop()
+    {
+        if (!mute)
+        {
+            airWalkSound.Stop();
+        }
+    }
+
+    public void PlatformCrushSound()
+    {
+        if (!mute)
         {
             if (jellyBurst.isPlaying)
             {
@@ -71,7 +335,7 @@ public class SoundManager : MonoBehaviour {
             if (birdSound.isPlaying || birdAfterEffect.isPlaying)
             {
                 birdSound.Stop();
-                //birdAfterEffect.Stop();
+       
                 birdSound.Play();
                 birdAfterEffect.Play();
             }
@@ -80,179 +344,8 @@ public class SoundManager : MonoBehaviour {
                 birdSound.Play();
                 birdAfterEffect.Play();
             }
-        }
-
-        if (number == 2)
-        {
-            if (blacklyBurst.isPlaying)
-            {
-                blacklyBurst.Stop();
-                blacklyBurst.Play();
-            }
-            else
-            {
-                blacklyBurst.Play();
-            }
-
-            if (birdSound.isPlaying || birdAfterEffect.isPlaying)
-            {
-                birdSound.Stop();
-                //birdAfterEffect.Stop();
-                birdSound.Play();
-                birdAfterEffect.Play();
-            }
-            else
-            {
-                birdSound.Play();
-                birdAfterEffect.Play();
-            }
-        }
-
-        if (number == 3)
-        {
-            if (bellyBurst.isPlaying)
-            {
-                bellyBurst.Stop();
-                bellyBurst.Play();
-            }
-            else
-            {
-                bellyBurst.Play();
-            }
-
-            if (birdSound.isPlaying || birdAfterEffect.isPlaying)
-            {
-                birdSound.Stop();
-                //birdAfterEffect.Stop();
-                birdSound.Play();
-                birdAfterEffect.Play();
-            }
-            else
-            {
-                birdSound.Play();
-                birdAfterEffect.Play();
-            }
-        }
-
-        if (number == 4)
-        {
-            if (gellyBurst.isPlaying)
-            {
-                gellyBurst.Stop();
-                gellyBurst.Play();
-            }
-            else
-            {
-                gellyBurst.Play();
-            }
-
-            if (birdSound.isPlaying || birdAfterEffect.isPlaying)
-            {
-                birdSound.Stop();
-                //birdAfterEffect.Stop();
-                birdSound.Play();
-                birdAfterEffect.Play();
-            }
-            else
-            {
-                birdSound.Play();
-                birdAfterEffect.Play();
-            }
-        }
-
-        if (number == 5)
-        {
-            if (rellyBurst.isPlaying)
-            {
-                rellyBurst.Stop();
-                rellyBurst.Play();
-            }
-            else
-            {
-                rellyBurst.Play();
-            }
-
-            if (birdSound.isPlaying || birdAfterEffect.isPlaying)
-            {
-                birdSound.Stop();
-                //birdAfterEffect.Stop();
-                birdSound.Play();
-                birdAfterEffect.Play();
-            }
-            else
-            {
-                birdSound.Play();
-                birdAfterEffect.Play();
-            }
-        }
-    }
-
-    public void BombHitSound()
-    {
-        if (bombBurst.isPlaying)
-        {
-            bombBurst.Stop();
-            bombBurst.Play();
-        }
-        else
-        {
-            bombBurst.Play();
-        }
-
-        if (birdSound.isPlaying || birdAfterEffect.isPlaying)
-        {
-            birdSound.Stop();
-            //birdAfterEffect.Stop();
-            birdSound.Play();
-            birdAfterEffect.Play();
-        }
-        else
-        {
-            birdSound.Play();
-            birdAfterEffect.Play();
-        }
-    }
-
-    public void DragonRoar()
-    {
-        if (dragonRoar.isPlaying)
-        {
 
         }
-        else
-        {
-            dragonRoar.Play();
-        }
-    }
-
-    public void DragonMute()
-    {
-        dragonRoar.Stop();
-    }
-
-    public void DragonKill()
-    {
-        dragonKill.Play();
-    }
-
-    public void FullAttackSound()
-    {
-        fullAttackBurst.Play();
-    }
-
-    public void DamageSound()
-    {
-        damageSound.Play();
-    }
-
-    public void TimeHackStart()
-    {
-        timeHack.Play();
-    }
-
-    public void TimeHackStop()
-    {
-        timeHack.Stop();
     }
 
 }

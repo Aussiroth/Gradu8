@@ -60,6 +60,7 @@ public class BlacklyManager : MonoBehaviour {
 					if (c2 == jelliesCols[i] && c2.GetComponent<Blackly>() != null)
                     {
                         c2.GetComponent<Blackly>().Slice();
+                       
                     }
                 }
             }

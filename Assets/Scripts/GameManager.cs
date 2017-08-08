@@ -80,6 +80,10 @@ public class GameManager : MonoBehaviour {
         }
 
         theScoreManager.scoreIncreasing = false;
+        
+        //stop AirWalk sound if player is killed during its activation,MUST put BEFORE deacivating player
+        FindObjectOfType<WeaponManager>().AirWalkOff();
+
         thePlayer.gameObject.SetActive(false);
 
         theDeathScreen.gameObject.SetActive(true);
@@ -146,12 +150,12 @@ public class GameManager : MonoBehaviour {
         thePlayer.transform.position = playerStartPoint;
         theDeadline.transform.position = deadlineStartPoint;
 
-		if (theDeadline.GetComponent<DeadlineController>() != null)
-		{
+		//if (theDeadline.tag == "deadline")
+		//{
 			theDeadline.GetComponent<DeadlineController>().ResetSpeed();
 			FindObjectOfType<DeadlineController>().killed = false;
 			FindObjectOfType<DeadlineController>().pause = false;
-		}
+		//}
 
         thePlayer.gameObject.SetActive(true);
 

@@ -7,7 +7,7 @@ public class PowerUps : MonoBehaviour {
 	public bool doublePoints;
 	public bool safeMode;
 
-	public float powerupLength;
+//	public float powerupLength;
 
 	private int powerupSelector;
 	private PowerupManager thePowerupManager;

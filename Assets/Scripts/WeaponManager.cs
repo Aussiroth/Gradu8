@@ -11,6 +11,8 @@ public class WeaponManager : MonoBehaviour {
     public GameObject timeHack;
     public GameObject fullHealthEffect;
 
+    public Animator airWalkAnimation;
+
     // Use this for initialization
     void Start () {
 		thePlayer = FindObjectOfType<PlayerController> ();
@@ -67,10 +69,14 @@ public class WeaponManager : MonoBehaviour {
     public void AirWalkOn()
     {
         FindObjectOfType<PlayerController>().groundCheckRadius = 10.0f;
+        airWalkAnimation.SetBool("AirWalk", true);
+        FindObjectOfType<SoundManager>().AirWalkStart();
     }
 
     public void AirWalkOff()
     {
         FindObjectOfType<PlayerController>().groundCheckRadius = 0.1f;
+        airWalkAnimation.SetBool("AirWalk", false);
+        FindObjectOfType<SoundManager>().AirWalkStop();
     }
 }
