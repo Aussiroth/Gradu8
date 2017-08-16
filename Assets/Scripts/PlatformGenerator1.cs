@@ -112,7 +112,7 @@ public class PlatformGenerator1 : MonoBehaviour {
                 newSpike.SetActive(true);
             }
 
-            transform.position = new Vector3(transform.position.x + (platformWidths[platformSelector] / 2), transform.position.y, transform.position.z);
+            transform.position = new Vector3(transform.position.x + (platformWidths[platformSelector] / 2), transform.position.y, transform.position.z - 1.0f);
 
         }
     }

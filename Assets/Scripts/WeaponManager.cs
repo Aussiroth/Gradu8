@@ -24,7 +24,7 @@ public class WeaponManager : MonoBehaviour {
 	}
 
 	//Postcond: weapon created, set to player position and activated
-	public void fireWeapon()
+	public void FireWeapon()
 	{
 		//Move the weapon to the position of the player and make it active when 'fired'
 		GameObject newWeapon = weaponPool.GetPooledObject();

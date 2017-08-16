@@ -34,6 +34,7 @@ public class PowerUps : MonoBehaviour {
 			//tell power up manager to increment correct count for powerups
 			thePowerupManager.IncreasePowerup(powerupSelector);
 			gameObject.SetActive(false);
+            FindObjectOfType<SoundManager>().PowerupGrab();
 		}
 	}
 }

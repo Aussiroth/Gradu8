@@ -5,13 +5,20 @@ using UnityEngine.SceneManagement;
 
 public class LevelSelector : MonoBehaviour {
 
+    public string Level1;
     public string Level2;
     public string Level3;
     public string Level4;
     public string LevelBoss;
     public string LevelBonus;
 
-	public void PlayLevel2()
+    public void PlayLevel1()
+    {
+        FindObjectOfType<GameManager>().tut = false;
+        SceneManager.LoadScene(Level1);       
+    }
+
+    public void PlayLevel2()
     {
         SceneManager.LoadScene(Level2);
     }

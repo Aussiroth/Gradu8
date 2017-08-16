@@ -76,6 +76,12 @@
     <Reference Include="UnityEditor">
       <HintPath>Library\UnityAssemblies\UnityEditor.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEditor.iOS.Extensions.Xcode">
+      <HintPath>Library\UnityAssemblies\UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.iOS.Extensions.Common">
+      <HintPath>Library\UnityAssemblies\UnityEditor.iOS.Extensions.Common.dll</HintPath>
+    </Reference>
     <Reference Include="Facebook.Unity.Settings">
       <HintPath>Library\FacebookSDK\Facebook.Unity.Settings.dll</HintPath>
     </Reference>
@@ -100,9 +106,11 @@
     <Compile Include="Assets\Scripts\BlacklyManager.cs" />
     <Compile Include="Assets\Scripts\Bomb.cs" />
     <Compile Include="Assets\Scripts\BombManager.cs" />
+    <Compile Include="Assets\Scripts\BonusManager.cs" />
     <Compile Include="Assets\Scripts\BossController.cs" />
     <Compile Include="Assets\Scripts\BossWeapon.cs" />
     <Compile Include="Assets\Scripts\CameraController.cs" />
+    <Compile Include="Assets\Scripts\CameraShake.cs" />
     <Compile Include="Assets\Scripts\CoinGenerator.cs" />
     <Compile Include="Assets\Scripts\DeadlineController.cs" />
     <Compile Include="Assets\Scripts\DeathMenu.cs" />
@@ -114,6 +122,8 @@
     <Compile Include="Assets\Scripts\JellyManager.cs" />
     <Compile Include="Assets\Scripts\LevelSelector.cs" />
     <Compile Include="Assets\Scripts\MainMenu.cs" />
+    <Compile Include="Assets\Scripts\MainMenuBGM.cs" />
+    <Compile Include="Assets\Scripts\NativeShareScript.cs" />
     <Compile Include="Assets\Scripts\ObjectDestroyer.cs" />
     <Compile Include="Assets\Scripts\ObjectPooler.cs" />
     <Compile Include="Assets\Scripts\PauseMenu.cs" />
@@ -131,6 +141,7 @@
     <Compile Include="Assets\Scripts\ScoreManager.cs" />
     <Compile Include="Assets\Scripts\SoundManager.cs" />
     <Compile Include="Assets\Scripts\Spike.cs" />
+    <Compile Include="Assets\Scripts\TutorialManager.cs" />
     <Compile Include="Assets\Scripts\WeaponManager.cs" />
   </ItemGroup>
   <ItemGroup>

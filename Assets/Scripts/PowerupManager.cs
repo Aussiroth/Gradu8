@@ -42,10 +42,16 @@ public class PowerupManager : MonoBehaviour {
 
 		//0 is double points, 1 is safemode, 2 is weapon, 3 is ultimate
 
+        //for testing, set to 10
 		for (int i = 0; i < storedPowerUps.Length; i++)
-			//for testing, set to 10
 			storedPowerUps [i] = 10;
-	}
+
+        if(FindObjectOfType<GameManager>().tut == true)
+        {
+            for (int i = 0; i < storedPowerUps.Length; i++)
+                storedPowerUps[i] += 90;
+        }
+    }
 
 	// Update is called once per frame
 	void Update () {
@@ -90,7 +96,7 @@ public class PowerupManager : MonoBehaviour {
 			{
 				storedPowerUps[2]--;
 				//fire weapon
-				theWeaponManager.fireWeapon();
+				theWeaponManager.FireWeapon();
 			}
 		}
         else if (CrossPlatformInputManager.GetButtonDown("Ultimate"))

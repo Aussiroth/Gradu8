@@ -20,11 +20,15 @@ public class GameManager : MonoBehaviour {
     public DeathMenu theDeathScreen;
 
     public bool powerupReset;
+    public bool tut;
+
+    public GameObject creditsBar;
 
 	// Use this for initialization
 	void Start () {
 		platformStartPoints = new Vector3[platformGenerators.Length];
-		for (int i = 0; i < platformGenerators.Length; i++)
+       
+        for (int i = 0; i < platformGenerators.Length; i++)
 		{
 			platformStartPoints[i] = platformGenerators[i].position;
 		}
@@ -32,6 +36,11 @@ public class GameManager : MonoBehaviour {
         deadlineStartPoint = theDeadline.transform.position;
 
         theScoreManager = FindObjectOfType<ScoreManager>();
+
+        if (FindObjectOfType<GameManager>().tut == false)
+            FindObjectOfType<PauseMenu>().LevelIntro();
+
+        FindObjectOfType<SoundManager>().BGM();
 	}
 	
 	// Update is called once per frame
@@ -87,6 +96,8 @@ public class GameManager : MonoBehaviour {
         thePlayer.gameObject.SetActive(false);
 
         theDeathScreen.gameObject.SetActive(true);
+
+        FindObjectOfType<SoundManager>().BGMStop();
 
         //StartCoroutine("RestartGameCo");//calls the RestartGameCo() method
     }
@@ -162,8 +173,21 @@ public class GameManager : MonoBehaviour {
         theScoreManager.scoreCount = 0;
         theScoreManager.jellyScoreCount = 0;
         theScoreManager.scoreIncreasing = true;
+        theScoreManager.nextLevel.SetActive(false);
+
+        FindObjectOfType<SoundManager>().BGM();
 
         powerupReset = true;
+    }
+
+    public void CreditsOn()
+    {
+        creditsBar.SetActive(true);
+    }
+
+    public void CreditsOff()
+    {
+        creditsBar.SetActive(false);
     }
     
     /* //Method to restart game

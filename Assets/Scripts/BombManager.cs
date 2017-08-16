@@ -13,7 +13,12 @@ public class BombManager : MonoBehaviour {
     private float deltaSpawn;
     public float minSpawn;
     public float maxSpawn;
- 
+
+    public float maxVertical;
+    public float minVertical;
+    public float maxHorizontal;
+    public float minHorizontal;
+
     public Transform trail;
     public GameObject spawnPoint;
     public bool isPaused;
@@ -38,7 +43,7 @@ public class BombManager : MonoBehaviour {
         {
             Bomb b = GetBomb();
 
-            b.LaunchBomb(Random.Range(5.0f, 5.0f), Random.Range(-3.0f, 3.0f), spawnPoint.transform.position);
+            b.LaunchBomb(Random.Range(minVertical, maxVertical), Random.Range(minHorizontal, maxHorizontal), spawnPoint.transform.position);
             lastSpawn = Time.time;
         }
 

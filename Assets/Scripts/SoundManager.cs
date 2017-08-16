@@ -5,7 +5,9 @@ using UnityEngine;
 public class SoundManager : MonoBehaviour {
 
     public bool mute;
+
     public AudioSource coinSound;
+    public AudioSource powerupSound;
     public AudioSource deathSound;
     public AudioSource jumpSound;
 
@@ -30,6 +32,8 @@ public class SoundManager : MonoBehaviour {
     public AudioSource airWalkSound;
 
     public AudioSource platformCrushSound;
+
+    public AudioSource bgm;
 	
 	void Start () {
       
@@ -38,6 +42,18 @@ public class SoundManager : MonoBehaviour {
     public void Mute()
     {
         mute = !mute;
+    }
+
+    public void MuteBGM()
+    {
+        if (bgm.isPlaying)
+        {
+            bgm.Stop();
+        }
+        else
+        {
+            bgm.Play();
+        }
     }
 
     public void CoinBling()
@@ -57,6 +73,23 @@ public class SoundManager : MonoBehaviour {
         }
     }
 
+    public void PowerupGrab()
+    {
+        if (!mute)
+        {
+            //this if condition is to prevent skipping of coin sounds when multiple coins are picked really fast
+            if (powerupSound.isPlaying)
+            {
+                powerupSound.Stop();
+                powerupSound.Play();
+            }
+            else
+            {
+                powerupSound.Play();
+            }
+        }
+    }
+
     public void DeathSound()
     {
         if (!mute)
@@ -70,7 +103,7 @@ public class SoundManager : MonoBehaviour {
         if (!mute)
         {
             jumpSound.Play();
-        }
+        }      
     }
 	
 	public void JellyHitSound(int number)
@@ -276,6 +309,8 @@ public class SoundManager : MonoBehaviour {
         {
             fullAttackBurst.Play();
         }
+
+        Handheld.Vibrate();
     }
 
     public void DamageSound()
@@ -348,4 +383,21 @@ public class SoundManager : MonoBehaviour {
         }
     }
 
+    public void BGM()
+    {
+        if (bgm.isPlaying)
+        {
+            bgm.Stop();
+            bgm.Play();
+        }
+        else
+        {
+            bgm.Play();
+        }
+    }
+
+    public void BGMStop()
+    {
+        bgm.Stop();
+    } 
 }

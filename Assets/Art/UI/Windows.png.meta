@@ -1,11 +1,12 @@
 fileFormatVersion: 2
 guid: 7d2a413db59b7d04884383eb12d640a4
-timeCreated: 1499940042
+timeCreated: 1502444293
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
     21300000: Windows_0
     21300002: Windows_1
+    21300004: Windows_2
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -76,6 +77,14 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+  - buildTarget: iPhone
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -100,6 +109,19 @@ TextureImporter:
         y: 3428
         width: 723
         height: 174
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Windows_2
+      rect:
+        serializedVersion: 2
+        x: 2350
+        y: 2966
+        width: 1098
+        height: 786
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

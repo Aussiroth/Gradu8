@@ -82,7 +82,7 @@ public class Bomb: MonoBehaviour {
         bManager.BombDeduct(5);
         sManager.BombHitSound();
 
-        this.tag = "weapon";
+        this.tag = "bomb";
 
         GetComponent<CircleCollider2D>().radius = 3.5f;
         StartCoroutine("Delay");
@@ -93,7 +93,7 @@ public class Bomb: MonoBehaviour {
     public void OnTriggerEnter2D(Collider2D other)
     {
         //Do weapon collision check here so it can easily call slice function
-        if (other.gameObject.tag == "weapon")
+        if (other.gameObject.tag == "weapon" || other.gameObject.tag == "antiplatform")
         {
             if (isSliced)
                 return;
@@ -107,12 +107,30 @@ public class Bomb: MonoBehaviour {
             bManager.AddScore(5);
             sManager.BombHitSound();
 
+            /* 
             this.tag = "weapon";
 
             GetComponent<CircleCollider2D>().radius = 3.5f;
             StartCoroutine("Delay");
+            */
 
             FindObjectOfType<ScoreManager>().AddLife();
+
+        }
+
+        if (other.gameObject.tag == "bomb")
+        {
+            if (isSliced)
+                return;
+
+            if (verticalVelocity < 0.5f)
+                verticalVelocity = 0.5f;
+
+            speed = speed * 0.5f;
+            isSliced = true;
+
+            bManager.AddScore(5);
+            sManager.BombHitSound();
 
         }
     }

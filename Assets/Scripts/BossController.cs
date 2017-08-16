@@ -20,6 +20,8 @@ public class BossController : MonoBehaviour {
 
 	public ObjectPooler weaponPooler;
 	public GameObject hpBar;
+    public GameObject bonusLevel;
+    public GameObject boss;
 
 	private bool higher;
 	private bool atPosition;
@@ -86,14 +88,17 @@ public class BossController : MonoBehaviour {
 			if (Random.Range(0, 100) < attackThreshold)
 			{
 				GameObject bossWeapon = weaponPooler.GetPooledObject();
-				bossWeapon.transform.position = transform.position;
+                bossWeapon.transform.position = transform.position;              
 				bossWeapon.SetActive(true);
-			}
+                bossWeapon.GetComponent<Rigidbody2D>().velocity = new Vector2(Random.Range(-5.0f,-10.0f), 0);
+                //bossWeapon.GetComponent<Rigidbody2D>().AddForce(-transform.position * 1);
+            }
 		}
 		//Check for boss ded
 		if (health <= 0)
 		{
-			FindObjectOfType<LevelSelector>().PlayLevelBonus();
+            bonusLevel.SetActive(true);
+            boss.SetActive(false);
 		}
 		//update health bar size
 		hpBar.GetComponent<RectTransform>().sizeDelta = new Vector2(30*health, 30);
@@ -102,10 +107,11 @@ public class BossController : MonoBehaviour {
 
 	public void OnTriggerEnter2D(Collider2D other)
 	{
-		if (other.tag == "weapon")
+		if (other.tag == "antiplatform")
 		{
 			health -= 1;
 			other.gameObject.SetActive(false);
+            FindObjectOfType<SoundManager>().DragonRoar();
 		}
 	}
 }

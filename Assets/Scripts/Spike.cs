@@ -4,18 +4,27 @@ using UnityEngine;
 
 public class Spike : MonoBehaviour {
 
-	public float platformLength;
-	public float leftBorder;
-	public float rightBorder;
+	public GameObject midPlatform;
+    public GameObject leftBorder;
+    public GameObject rightBorder;
+    
+    //public float leftBorder;
+	//public float rightBorder;
 
 	public float moveSpeed;
 	private bool rightwards;
 
 	// Use this for initialization
-	void Awake () {
-		platformLength = 0;
+	void Awake ()
+    {
 		rightwards = true;
 	}
+
+    void Start()
+    {
+        gameObject.transform.position = new Vector3(midPlatform.transform.position.x, midPlatform.transform.position.y + 0.1f, midPlatform.transform.position.z);
+
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -23,7 +32,7 @@ public class Spike : MonoBehaviour {
 		//reverse direction if we exceed boundary
 		if (rightwards)
 		{
-			if (gameObject.transform.position.x < rightBorder)
+			if (gameObject.transform.position.x < rightBorder.transform.position.x)
 			{
 				gameObject.transform.position = new Vector3(gameObject.transform.position.x + moveSpeed*Time.deltaTime, 
 											gameObject.transform.position.y, gameObject.transform.position.z);
@@ -35,7 +44,7 @@ public class Spike : MonoBehaviour {
 		}
 		else
 		{
-			if (gameObject.transform.position.x > leftBorder)
+			if (gameObject.transform.position.x > leftBorder.transform.position.x)
 			{
 				gameObject.transform.position = new Vector3(gameObject.transform.position.x - moveSpeed*Time.deltaTime, 
 					gameObject.transform.position.y, gameObject.transform.position.z);
@@ -47,6 +56,7 @@ public class Spike : MonoBehaviour {
 		}
 	}
 
+    /*
 	public void setPlatformLength(float newLength)
 	{
 		platformLength = newLength;
@@ -54,4 +64,5 @@ public class Spike : MonoBehaviour {
 		leftBorder = gameObject.transform.position.x - platformLength/2 + 1.0f;
 		rightBorder = gameObject.transform.position.x + platformLength/2 - 1.0f;
 	}
+    */
 }

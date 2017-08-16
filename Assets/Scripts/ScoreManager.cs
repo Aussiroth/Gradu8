@@ -25,6 +25,9 @@ public class ScoreManager : MonoBehaviour {
 
     public GameObject damageEffect;
 
+    public float nextLevelScore;
+    public GameObject nextLevel;
+
     // Use this for initialization
 	void Start () {
 		if(PlayerPrefs.HasKey("HighScore"))
@@ -37,22 +40,31 @@ public class ScoreManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-       if (scoreIncreasing)
+        if (FindObjectOfType<GameManager>().tut == false)
         {
-			if (scorePowerup)
-				scoreCount += pointsPerSecond * Time.deltaTime * powerupMultiplier;
-			else
-				scoreCount += pointsPerSecond * Time.deltaTime;
+            if (scoreIncreasing)
+            {
+                if (scorePowerup)
+                    scoreCount += pointsPerSecond * Time.deltaTime * powerupMultiplier;
+                else
+                    scoreCount += pointsPerSecond * Time.deltaTime;
+            }
+
+            if (scoreCount > hiScoreCount)
+            {
+                hiScoreCount = scoreCount;
+                PlayerPrefs.SetFloat("HighScore", hiScoreCount);//saves hiScore into computer
+            }
+
+            scoreText.text = "score : " + Mathf.Round(scoreCount);
+            hiScoreText.text = "High Score : " + Mathf.Round(hiScoreCount);            
+
+            if (jellyScoreCount >= nextLevelScore)
+            {
+                nextLevel.SetActive(true);
+            }
         }
 
-        if(scoreCount > hiScoreCount)
-        {
-            hiScoreCount = scoreCount;
-            PlayerPrefs.SetFloat("HighScore", hiScoreCount);//saves hiScore into computer
-        }
-
-        scoreText.text = "score : " + Mathf.Round(scoreCount);
-        hiScoreText.text = "High Score : " + Mathf.Round(hiScoreCount);
         jellyScoreText.text = jellyScoreCount.ToString();
 
     }
@@ -81,10 +93,21 @@ public class ScoreManager : MonoBehaviour {
     {
         lifepoint--;
 
+        Handheld.Vibrate();
+
         if (lifepoint == 0)
         {
-            FindObjectOfType<GameManager>().DeathScene();
-            deathSound.Play();
+            if (FindObjectOfType<GameManager>().tut == false)
+            {
+                FindObjectOfType<GameManager>().DeathScene();
+                deathSound.Play();
+            }
+        }
+
+        //for tutorial purposes
+        if(lifepoint < 0)
+        {
+            lifepoint = 1;
         }
 
         if ((lifepoint - 1) >= 0)

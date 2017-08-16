@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -85,7 +85,7 @@ public class Jelly : MonoBehaviour {
 	public void OnTriggerEnter2D(Collider2D other)
 	{
 		//Do weapon collision check here so it can easily call slice function
-		if (other.gameObject.tag == "weapon")
+		if (other.gameObject.tag == "weapon" || other.gameObject.tag == "antiplatform")
 		{
 			Slice();
 		}

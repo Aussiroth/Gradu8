@@ -14,6 +14,11 @@ public class JellyManager : MonoBehaviour {
     public float minSpawn;
     public float maxSpawn;
 
+    public float maxVertical;
+    public float minVertical;
+    public float maxHorizontal;
+    public float minHorizontal;
+
     //public static JellyManager Instance { set; get;} //create an instance of the JellyManager since JellyManager is not static
 
     public Transform trail;
@@ -51,7 +56,7 @@ public class JellyManager : MonoBehaviour {
         {
             Jelly j = GetJelly();
 
-            j.LaunchJelly(Random.Range(5.0f, 5.0f), Random.Range(-3.0f, 3.0f), spawnPoint.transform.position);
+            j.LaunchJelly(Random.Range(minVertical,maxVertical), Random.Range(minHorizontal, maxHorizontal), spawnPoint.transform.position);
             lastSpawn = Time.time;
         }
 

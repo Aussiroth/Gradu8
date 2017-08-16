@@ -85,7 +85,7 @@ public class Relly : MonoBehaviour {
 	public void OnTriggerEnter2D(Collider2D other)
 	{
 		//Do weapon collision check here so it can easily call slice function
-		if (other.gameObject.tag == "weapon")
+		if (other.gameObject.tag == "weapon" || other.gameObject.tag == "antiplatform")
 		{
 			Slice();
 		}
